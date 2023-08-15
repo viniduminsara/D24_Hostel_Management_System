@@ -1,0 +1,18 @@
+# Compiled class files
+target/
+
+# IDE specific files
+.idea/
+*.iml
+
+# Maven specific files
+mvnw
+mvnw.cmd
+.mvn/
+
+# Log files
+*.log
+
+# IntelliJ IDEA specific files
+*.ipr
+*.iws
