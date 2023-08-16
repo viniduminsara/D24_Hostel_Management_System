@@ -1,0 +1,25 @@
+.login_btn{
+    -fx-text-align: center;
+    -fx-font-size: 20px;
+    -fx-letter-spacing: 2px;
+    -fx-text-decoration: none;
+    -fx-text-fill: #725AC1;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-transition: ease-out 0.5s;
+    -fx-border-width: 2px;
+    -fx-border-color: #725AC1;
+    -fx-border-radius: 10px;
+    -fx-effect: innershadow(gaussian, #725AC1, 0, 0, 0, 0);
+}
+
+.login_btn:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #725AC1;
+    -fx-background-radius: 10px;
+}
+
+.login_btn:pressed {
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+}
