@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1190.0" stylesheets="@../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.HomeformController">
+   <children>
+      <AnchorPane layoutX="31.0" layoutY="119.0" prefHeight="183.0" prefWidth="360.0" styleClass="total_pane">
+         <children>
+            <Label layoutX="33.0" layoutY="27.0" prefHeight="46.0" prefWidth="201.0" text="Total Students" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="87.0" text="04" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="42.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="99.0" fitWidth="109.0" layoutX="227.0" layoutY="48.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/student.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="412.0" layoutY="119.0" prefHeight="183.0" prefWidth="360.0" styleClass="total_pane">
+         <children>
+            <Label layoutX="33.0" layoutY="30.0" prefHeight="46.0" prefWidth="201.0" text="Total Rooms" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="90.0" text="05" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="42.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="99.0" fitWidth="109.0" layoutX="224.0" layoutY="51.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/rooms.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="792.0" layoutY="119.0" prefHeight="183.0" prefWidth="360.0" styleClass="total_pane">
+         <children>
+            <Label layoutX="27.0" layoutY="31.0" prefHeight="46.0" prefWidth="221.0" text="Total Reservations" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="91.0" text="08" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="42.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="99.0" fitWidth="109.0" layoutX="229.0" layoutY="46.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/reservation.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="38.0" layoutY="40.0" text="Good morning, Vinidu Minsara" textFill="#9170cb">
+         <font>
+            <Font name="Comic Sans MS" size="28.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
