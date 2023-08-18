@@ -1,18 +1,15 @@
-.button:focused{
+.dash_button:focused{
     -fx-background-color: #e5e4ec;
     -fx-border-width: 0 0 0 10px;
     -fx-border-color: #9170cb;
     -fx-opacity: 100% !important;
 }
 
-.button:hover{
+.dash_button:hover{
     -fx-opacity: 70%;
 }
 
 .total_pane{
-    -fx-border-width: 8px;
-    -fx-border-color: #9170cb;
-    -fx-border-radius: 20px;
     -fx-background-color: #e7e1ec;
     -fx-background-radius: 20px;
 }
