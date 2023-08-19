@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -95,20 +96,30 @@
                   <Insets left="60.0" />
                </padding>
             </JFXButton>
-            <JFXButton alignment="CENTER" graphicTextGap="10.0" layoutX="99.0" layoutY="718.0" onAction="#btnAccountOnAction" prefHeight="59.0" prefWidth="152.0" text="Logout" textFill="#9170cb">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="20.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="41.0" fitWidth="42.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../img/logout.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="contentPane" layoutX="358.0" layoutY="69.0" prefHeight="730.0" prefWidth="1190.0" />
+      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="10.0" layoutX="1471.0" layoutY="10.0" onAction="#btnLogoutOnAction" prefHeight="55.0" prefWidth="47.0" text="Logout" textFill="#9170cb">
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <ImageView fitHeight="53.0" fitWidth="62.0" layoutX="1248.0" layoutY="10.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/account.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1322.0" layoutY="24.0" text="Vinidu Minsara" textFill="#9170cb">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
