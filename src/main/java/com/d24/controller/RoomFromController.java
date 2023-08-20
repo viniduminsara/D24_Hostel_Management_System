@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StudentFormController {
+public class RoomFromController {
 
     @FXML
     void btnAddOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/addStudentForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/editStudentForm.fxml"))));
         stage.setTitle("Add new student");
         stage.centerOnScreen();
         stage.show();

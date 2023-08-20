@@ -49,8 +49,8 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void btnRoomsOnAction(ActionEvent event) {
-
+    void btnRoomsOnAction(ActionEvent event) throws IOException {
+        contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/roomFrom.fxml")));
     }
 
     @FXML
