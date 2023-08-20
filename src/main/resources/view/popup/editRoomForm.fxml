@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="546.0" prefWidth="600.0" stylesheets="@../../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.popup.EditRoomFormController">
+    <children>
+        <Label layoutX="41.0" layoutY="36.0" text="Update Room Details" textFill="#9170cb">
+            <font>
+                <Font name="Comic Sans MS" size="36.0" />
+            </font>
+        </Label>
+        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="185.0" prefHeight="31.0" prefWidth="473.0" promptText="type" unFocusColor="#9170cb">
+            <font>
+                <Font name="Comic Sans MS" size="15.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="262.0" prefHeight="31.0" prefWidth="473.0" promptText="keymoney" unFocusColor="#9170cb">
+            <font>
+                <Font name="Comic Sans MS" size="15.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="340.0" prefHeight="31.0" prefWidth="473.0" promptText="qty" unFocusColor="#9170cb">
+            <font>
+                <Font name="Comic Sans MS" size="15.0" />
+            </font>
+        </JFXTextField>
+        <JFXButton contentDisplay="RIGHT" graphicTextGap="12.0" layoutX="424.0" layoutY="443.0" prefHeight="51.0" prefWidth="134.0" style="-fx-background-color: #e09f3e; -fx-background-radius: 10px;" text="Update" textFill="WHITE">
+            <font>
+                <Font name="Comic Sans MS Bold" size="20.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../../img/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+      <Label layoutX="53.0" layoutY="126.0" text="Room Type Id : ">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="195.0" layoutY="126.0" text="R - 001">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
