@@ -44,8 +44,8 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void btnReservationOnAction(ActionEvent event) {
-
+    void btnReservationOnAction(ActionEvent event) throws IOException {
+        contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/reservationForm.fxml")));
     }
 
     @FXML

@@ -8,10 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" style="-fx-background-color: #e9ecef;" stylesheets="@../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.DashboardFormController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7e4eb" height="75.0" layoutX="342.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1206.0" />
       <AnchorPane layoutX="-1.0" prefHeight="800.0" prefWidth="350.0" style="-fx-background-color: #d3cbe0; -fx-background-radius: 10px;">
          <effect>
             <DropShadow height="14.0" width="28.0" />
@@ -122,6 +124,6 @@
             <Font name="Comic Sans MS" size="18.0" />
          </font>
       </Label>
-      <Line endX="1031.3333740234375" endY="-2.0" layoutX="493.0" layoutY="75.0" startX="-122.0" startY="-2.0" stroke="#9170cb" />
+      <Line endX="1031.3333740234375" endY="-2.0" layoutX="493.0" layoutY="74.0" startX="-122.0" startY="-2.0" stroke="#9170cb" strokeWidth="2.0" />
    </children>
 </AnchorPane>

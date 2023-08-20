@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="730.0" prefWidth="1190.0" style="-fx-background-color: #e9ecef;" stylesheets="@../style/table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.ReservationFormController">
+    <children>
+        <Label layoutX="903.0" layoutY="29.0" text="Reservation" textFill="#9170cb">
+            <font>
+                <Font name="Comic Sans MS Bold" size="35.0" />
+            </font>
+        </Label>
+        <TableView layoutX="50.0" layoutY="181.0" prefHeight="513.0" prefWidth="1081.0">
+            <columns>
+                <TableColumn prefWidth="141.0" text="Reservation Id" />
+                <TableColumn prefWidth="160.0" text="date" />
+                <TableColumn prefWidth="168.0" text="Student Id" />
+                <TableColumn prefWidth="176.0" text="Room type Id" />
+                <TableColumn prefWidth="183.0" text="Status" />
+                <TableColumn prefWidth="252.0" text="Action" />
+            </columns>
+        </TableView>
+        <AnchorPane layoutX="54.0" layoutY="90.0" prefHeight="64.0" prefWidth="379.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
+            <children>
+                <JFXTextField focusColor="#9170cb" layoutX="66.0" layoutY="11.0" prefHeight="37.0" prefWidth="293.0" promptText="Search" unFocusColor="#9170cb">
+                    <font>
+                        <Font name="Comic Sans MS" size="15.0" />
+                    </font>
+                </JFXTextField>
+                <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../img/search.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <JFXButton graphicTextGap="8.0" layoutX="932.0" layoutY="116.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="New Reservation" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../img/plus.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+    </children>
+</AnchorPane>
