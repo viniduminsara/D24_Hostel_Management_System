@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="660.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.popup.AddStudentFormController">
+<AnchorPane prefHeight="660.0" prefWidth="600.0" stylesheets="@../../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.popup.AddStudentFormController">
    <children>
       <Label layoutX="53.0" layoutY="36.0" text="Add New Student" textFill="#9170cb">
          <font>
@@ -38,8 +37,8 @@
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker defaultColor="#9170cb" layoutX="55.0" layoutY="432.0" prefHeight="31.0" prefWidth="473.0" promptText="date of birth" />
-      <JFXComboBox focusColor="#9170cb" labelFloat="true" layoutX="55.0" layoutY="507.0" prefHeight="31.0" prefWidth="250.0" promptText="gender" unFocusColor="#9170cb" />
+      <JFXDatePicker defaultColor="#9170cb" layoutX="55.0" layoutY="432.0" prefHeight="31.0" prefWidth="473.0" promptText="date of birth" showWeekNumbers="true" styleClass="font_change" />
+      <JFXComboBox focusColor="#9170cb" labelFloat="true" layoutX="55.0" layoutY="507.0" prefHeight="31.0" prefWidth="250.0" promptText="gender" styleClass="font_change" unFocusColor="#9170cb" />
       <JFXButton contentDisplay="RIGHT" graphicTextGap="8.0" layoutX="440.0" layoutY="578.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />

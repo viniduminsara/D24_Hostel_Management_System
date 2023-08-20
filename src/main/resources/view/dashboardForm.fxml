@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1550.0" style="-fx-background-color: #e9ecef;" stylesheets="@../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.DashboardFormController">
@@ -121,5 +122,6 @@
             <Font name="Comic Sans MS" size="18.0" />
          </font>
       </Label>
+      <Line endX="1031.3333740234375" endY="-2.0" layoutX="493.0" layoutY="75.0" startX="-122.0" startY="-2.0" stroke="#9170cb" />
    </children>
 </AnchorPane>
