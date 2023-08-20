@@ -15,7 +15,7 @@ public class StudentFormController {
     void btnAddOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/addStudentForm.fxml"))));
-        stage.setTitle("Add new student");
+        stage.setTitle("Add New Student");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.centerOnScreen();
         stage.show();

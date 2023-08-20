@@ -16,6 +16,7 @@ public class RoomFromController {
     void btnAddOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/addRoomForm.fxml"))));
+        stage.setTitle("Add New Room");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.centerOnScreen();
         stage.showAndWait();
