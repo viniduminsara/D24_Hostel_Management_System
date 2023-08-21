@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DashboardFormController implements Initializable {
+public class DashboardFormController{
 
     @FXML
     private AnchorPane contentPane;
@@ -36,8 +36,7 @@ public class DashboardFormController implements Initializable {
 
     private JFXButton lastClickedButton;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(){
         try {
             contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/homeform.fxml")));
         } catch (IOException e) {

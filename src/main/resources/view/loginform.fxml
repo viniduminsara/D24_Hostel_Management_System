@@ -66,5 +66,28 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
+      <JFXTextField fx:id="txtVisiblePassword" focusColor="#9170cb" layoutX="149.0" layoutY="409.0" prefHeight="42.0" prefWidth="441.0" promptText="password" unFocusColor="#9170cb">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="showpasswordbtn" contentDisplay="GRAPHIC_ONLY" layoutX="536.0" layoutY="408.0" onAction="#showpasswordbtnOnAction">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="37.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/opened_eye.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="closepasswordbtn" contentDisplay="GRAPHIC_ONLY" layoutX="536.0" layoutY="410.0" onAction="#closepasswordbtnOnAction">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="37.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/closed-eye.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

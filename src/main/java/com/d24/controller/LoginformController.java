@@ -1,6 +1,7 @@
 package com.d24.controller;
 
 import animatefx.animation.FadeIn;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -13,13 +14,30 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginformController {
+public class LoginformController{
 
     @FXML
     private JFXTextField txtUsername;
 
     @FXML
     private JFXPasswordField txtPassword;
+
+    @FXML
+    private JFXButton showpasswordbtn;
+
+    @FXML
+    private JFXButton closepasswordbtn;
+
+    @FXML
+    private JFXTextField txtVisiblePassword;
+
+
+    public void initialize(){
+        closepasswordbtn.setVisible(false);
+        txtVisiblePassword.setVisible(false);
+
+        txtVisiblePassword.textProperty().bindBidirectional(txtPassword.textProperty());
+    }
 
     @FXML
     void loginBtnOnAction(ActionEvent event) throws IOException {
@@ -41,5 +59,23 @@ public class LoginformController {
 
         //add animation
         new FadeIn(scene).play();
+    }
+
+    @FXML
+    void closepasswordbtnOnAction(ActionEvent event) {
+        txtVisiblePassword.setVisible(false);
+        closepasswordbtn.setVisible(false);
+        txtPassword.setVisible(true);
+        showpasswordbtn.setVisible(true);
+        txtPassword.requestFocus();
+    }
+
+    @FXML
+    void showpasswordbtnOnAction(ActionEvent event) {
+        txtVisiblePassword.setVisible(true);
+        closepasswordbtn.setVisible(true);
+        txtPassword.setVisible(false);
+        showpasswordbtn.setVisible(false);
+        txtVisiblePassword.requestFocus();
     }
 }
