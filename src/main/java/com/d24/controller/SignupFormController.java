@@ -1,6 +1,7 @@
 package com.d24.controller;
 
 import animatefx.animation.FadeIn;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -28,6 +29,22 @@ public class SignupFormController {
     private JFXTextField txtEmail;
 
     @FXML
+    private JFXTextField txtVisiblePassword;
+
+    @FXML
+    private JFXButton showPasswordBtn;
+
+    @FXML
+    private JFXButton closePasswordBtn;
+
+    public void initialize(){
+        closePasswordBtn.setVisible(false);
+        txtVisiblePassword.setVisible(false);
+
+        txtVisiblePassword.textProperty().bindBidirectional(txtPassword.textProperty());
+    }
+
+    @FXML
     void signupBtnOnAction(ActionEvent event) {
 
     }
@@ -42,4 +59,23 @@ public class SignupFormController {
         //add animation
         new FadeIn(scene).play();
     }
+
+    @FXML
+    void closePasswordBtnOnAction(ActionEvent event) {
+        txtVisiblePassword.setVisible(false);
+        closePasswordBtn.setVisible(false);
+        txtPassword.setVisible(true);
+        showPasswordBtn.setVisible(true);
+        txtPassword.requestFocus();
+    }
+
+    @FXML
+    void showPasswordBtnOnAction(ActionEvent event) {
+        txtVisiblePassword.setVisible(true);
+        closePasswordBtn.setVisible(true);
+        txtPassword.setVisible(false);
+        showPasswordBtn.setVisible(false);
+        txtVisiblePassword.requestFocus();
+    }
+
 }
