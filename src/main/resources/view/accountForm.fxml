@@ -64,7 +64,7 @@
                   <Font name="Comic Sans MS Bold" size="20.0" />
                </font>
             </Label>
-            <JFXButton layoutX="41.0" layoutY="270.0" prefHeight="37.0" prefWidth="404.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Edit profile details" textFill="WHITE">
+            <JFXButton layoutX="41.0" layoutY="270.0" onAction="#editProfileOnAction" prefHeight="37.0" prefWidth="404.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Edit profile details" textFill="WHITE">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
@@ -78,7 +78,7 @@
                   <Font name="Comic Sans MS Bold" size="24.0" />
                </font>
             </Label>
-            <JFXButton layoutX="41.0" layoutY="270.0" prefHeight="37.0" prefWidth="440.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Change Password" textFill="WHITE">
+            <JFXButton layoutX="41.0" layoutY="270.0" onAction="#changePasswordOnAction" prefHeight="37.0" prefWidth="440.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Change Password" textFill="WHITE">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
