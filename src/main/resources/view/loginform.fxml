@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -57,5 +58,13 @@
             <Image url="@../img/password.png" />
          </image>
       </ImageView>
+      <Label layoutX="292.0" layoutY="558.0" onMouseClicked="#signupOnAction" text="Don't have account, Signup now" textFill="#725ac1">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
    </children>
 </AnchorPane>

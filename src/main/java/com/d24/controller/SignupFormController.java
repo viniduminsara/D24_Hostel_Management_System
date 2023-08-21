@@ -13,29 +13,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginformController {
+public class SignupFormController {
 
     @FXML
-    private JFXTextField txtUsername;
+    private JFXTextField txtFullName;
 
     @FXML
     private JFXPasswordField txtPassword;
 
     @FXML
-    void loginBtnOnAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) txtUsername.getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/view/dashboardForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+    private JFXTextField txtUsername;
 
-        //add animation
-        new FadeIn(scene).play();
+    @FXML
+    private JFXTextField txtEmail;
+
+    @FXML
+    void signupBtnOnAction(ActionEvent event) {
+
     }
 
     @FXML
-    void signupOnAction(MouseEvent event) throws IOException {
+    void loginOnAction(MouseEvent event) throws IOException {
         Stage stage = (Stage) txtUsername.getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/view/signupForm.fxml"));
+        Parent scene = FXMLLoader.load(getClass().getResource("/view/loginform.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
 
