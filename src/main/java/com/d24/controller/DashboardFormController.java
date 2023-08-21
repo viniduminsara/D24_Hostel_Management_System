@@ -1,9 +1,7 @@
 package com.d24.controller;
 
-import animatefx.animation.FadeIn;
-import animatefx.animation.Flip;
-import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideInRight;
+import animatefx.animation.*;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +18,23 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     private AnchorPane contentPane;
+
+    @FXML
+    private JFXButton DashboardBtn;
+
+    @FXML
+    private JFXButton StudentBtn;
+
+    @FXML
+    private JFXButton RoomBtn;
+
+    @FXML
+    private JFXButton ReservationBtn;
+
+    @FXML
+    private JFXButton AccountBtn;
+
+    private JFXButton lastClickedButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,11 +47,12 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void btnAccountOnAction(ActionEvent event) {
-
+        handleButtonClick(AccountBtn);
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
+        handleButtonClick(DashboardBtn);
         contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/homeform.fxml")));
         new SlideInRight(contentPane).setSpeed(2).play();
     }
@@ -51,19 +66,37 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void btnReservationOnAction(ActionEvent event) throws IOException {
+        handleButtonClick(ReservationBtn);
         contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/reservationForm.fxml")));
         new SlideInRight(contentPane).setSpeed(2).play();
     }
 
     @FXML
     void btnRoomsOnAction(ActionEvent event) throws IOException {
+        handleButtonClick(RoomBtn);
         contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/roomFrom.fxml")));
         new SlideInRight(contentPane).setSpeed(2).play();
     }
 
     @FXML
     void btnStudentOnAction(ActionEvent event) throws IOException {
+        handleButtonClick(StudentBtn);
         contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/studentForm.fxml")));
         new SlideInRight(contentPane).setSpeed(2).play();
+    }
+
+    private void handleButtonClick(JFXButton button) {
+        // Remove the styling from the previous lastClickedButton
+        if (lastClickedButton != null) {
+            lastClickedButton.getStyleClass().remove("focused_btn");
+        }else{
+            DashboardBtn.getStyleClass().remove("focused_btn");
+        }
+
+        // Add the styling to the current button
+        button.getStyleClass().add("focused_btn");
+
+        // Set the current button as the lastClickedButton
+        lastClickedButton = button;
     }
 }

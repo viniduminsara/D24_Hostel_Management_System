@@ -1,4 +1,4 @@
-.dash_button:focused{
+.focused_btn{
     -fx-background-color: #e5e4ec;
     -fx-border-width: 0 0 0 10px;
     -fx-border-color: #9170cb;
