@@ -46,8 +46,10 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void btnAccountOnAction(ActionEvent event) {
+    void btnAccountOnAction(ActionEvent event) throws IOException {
         handleButtonClick(AccountBtn);
+        contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/accountForm.fxml")));
+        new SlideInRight(contentPane).setSpeed(2).play();
     }
 
     @FXML

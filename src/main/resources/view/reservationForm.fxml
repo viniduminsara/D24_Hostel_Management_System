@@ -41,9 +41,9 @@
                 </ImageView>
             </children>
         </AnchorPane>
-        <JFXButton graphicTextGap="8.0" layoutX="932.0" layoutY="116.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="New Reservation" textFill="WHITE">
+        <JFXButton graphicTextGap="8.0" layoutX="923.0" layoutY="116.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="202.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="New Reservation" textFill="WHITE">
             <font>
-                <Font size="18.0" />
+                <Font name="Comic Sans MS" size="18.0" />
             </font>
             <graphic>
                 <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true">

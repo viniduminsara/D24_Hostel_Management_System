@@ -40,9 +40,9 @@
                 </ImageView>
             </children>
         </AnchorPane>
-        <JFXButton graphicTextGap="8.0" layoutX="901.0" layoutY="109.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="228.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Add New Room Type" textFill="WHITE">
+        <JFXButton graphicTextGap="8.0" layoutX="896.0" layoutY="109.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="234.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Add New Room Type" textFill="WHITE">
             <font>
-                <Font size="18.0" />
+                <Font name="Comic Sans MS" size="18.0" />
             </font>
             <graphic>
                 <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true">
