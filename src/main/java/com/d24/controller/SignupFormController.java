@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SignupFormController {
 
@@ -52,24 +53,32 @@ public class SignupFormController {
 
     @FXML
     void signupBtnOnAction(ActionEvent event) {
-        String fullName = txtFullName.getText();
-        String username = txtUsername.getText();
-        String email = txtEmail.getText();
-        String password = txtPassword.getText();
+        if (!(txtFullName.getText().isEmpty() || txtUsername.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty())){
+            String fullName = txtFullName.getText();
+            String username = txtUsername.getText();
+            String email = txtEmail.getText();
+            String password = txtPassword.getText();
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setFullName(fullName);
-        userDTO.setUsername(username);
-        userDTO.setEmail(email);
-        userDTO.setPassword(password);
+            UserDTO userDTO = new UserDTO();
+            userDTO.setFullName(fullName);
+            userDTO.setUsername(username);
+            userDTO.setEmail(email);
+            userDTO.setPassword(password);
 
-        boolean isSaved = signupBO.saveUser(userDTO);
-        if (isSaved){
-            new Alert(Alert.AlertType.CONFIRMATION,"Sign up successful").show();
-        }else{
-            new Alert(Alert.AlertType.WARNING,"Sign up unsuccessful").show();
+            try {
+                boolean isSaved = signupBO.saveUser(userDTO);
+                if (isSaved){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Sign up successful").show();
+                    clearComponents();
+                }else{
+                    new Alert(Alert.AlertType.WARNING,"Sign up unsuccessful").show();
+                }
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            new Alert(Alert.AlertType.WARNING,"Please fill all fields").show();
         }
-
     }
 
     @FXML
@@ -99,6 +108,13 @@ public class SignupFormController {
         txtPassword.setVisible(false);
         showPasswordBtn.setVisible(false);
         txtVisiblePassword.requestFocus();
+    }
+
+    private void clearComponents(){
+        txtFullName.clear();
+        txtUsername.clear();
+        txtEmail.clear();
+        txtPassword.clear();
     }
 
 }
