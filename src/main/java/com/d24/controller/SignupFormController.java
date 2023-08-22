@@ -1,6 +1,9 @@
 package com.d24.controller;
 
 import animatefx.animation.FadeIn;
+import com.d24.bo.custom.SignupBO;
+import com.d24.bo.custom.impl.SignupBOImpl;
+import com.d24.dto.UserDTO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -9,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -37,6 +41,8 @@ public class SignupFormController {
     @FXML
     private JFXButton closePasswordBtn;
 
+    SignupBO signupBO = new SignupBOImpl();
+
     public void initialize(){
         closePasswordBtn.setVisible(false);
         txtVisiblePassword.setVisible(false);
@@ -46,6 +52,23 @@ public class SignupFormController {
 
     @FXML
     void signupBtnOnAction(ActionEvent event) {
+        String fullName = txtFullName.getText();
+        String username = txtUsername.getText();
+        String email = txtEmail.getText();
+        String password = txtPassword.getText();
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setFullName(fullName);
+        userDTO.setUsername(username);
+        userDTO.setEmail(email);
+        userDTO.setPassword(password);
+
+        boolean isSaved = signupBO.saveUser(userDTO);
+        if (isSaved){
+            new Alert(Alert.AlertType.CONFIRMATION,"Sign up successful").show();
+        }else{
+            new Alert(Alert.AlertType.WARNING,"Sign up unsuccessful").show();
+        }
 
     }
 
