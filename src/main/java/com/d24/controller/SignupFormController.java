@@ -13,11 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class SignupFormController {
 
@@ -42,13 +44,41 @@ public class SignupFormController {
     @FXML
     private JFXButton closePasswordBtn;
 
+    @FXML
+    private Label passwordcheck;
+
+    @FXML
+    private JFXButton signupBtn;
+
     SignupBO signupBO = new SignupBOImpl();
 
     public void initialize(){
         closePasswordBtn.setVisible(false);
         txtVisiblePassword.setVisible(false);
+        signupBtn.setDisable(true);
 
         txtVisiblePassword.textProperty().bindBidirectional(txtPassword.textProperty());
+
+        txtPassword.textProperty().addListener((observable, oldValue, newValue) ->{
+            // Check password length and characters
+            if (newValue.length() < 8) {
+                passwordcheck.setStyle("-fx-text-fill: #c60000");
+                passwordcheck.setText("❌ Password should contain 8 characters");
+                signupBtn.setDisable(true);
+            } else if (!Pattern.compile("[A-Z]").matcher(newValue).find()) {
+                passwordcheck.setStyle("-fx-text-fill: #e16507");
+                passwordcheck.setText("❌ Password should contain uppercase characters");
+                signupBtn.setDisable(true);
+            } else if (!Pattern.compile("[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]").matcher(newValue).find()) {
+                passwordcheck.setStyle("-fx-text-fill: #e16507");
+                passwordcheck.setText("❌ Password should contain special character");
+                signupBtn.setDisable(true);
+            }else{
+                passwordcheck.setStyle("-fx-text-fill: #098609");
+                passwordcheck.setText("✅ Password is suitable");
+                signupBtn.setDisable(false);
+            }
+        });
     }
 
     @FXML
