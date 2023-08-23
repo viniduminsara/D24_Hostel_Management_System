@@ -4,6 +4,7 @@ import animatefx.animation.FadeIn;
 import com.d24.bo.custom.SignupBO;
 import com.d24.bo.custom.impl.SignupBOImpl;
 import com.d24.dto.UserDTO;
+import com.d24.util.RegExPatterns;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -84,27 +85,35 @@ public class SignupFormController {
     @FXML
     void signupBtnOnAction(ActionEvent event) {
         if (!(txtFullName.getText().isEmpty() || txtUsername.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty())){
-            String fullName = txtFullName.getText();
-            String username = txtUsername.getText();
-            String email = txtEmail.getText();
-            String password = txtPassword.getText();
+            if (RegExPatterns.getNamePattern().matcher(txtFullName.getText()).matches()) {
+                if (RegExPatterns.getEmailPattern().matcher(txtEmail.getText()).matches()) {
+                    String fullName = txtFullName.getText();
+                    String username = txtUsername.getText();
+                    String email = txtEmail.getText();
+                    String password = txtPassword.getText();
 
-            UserDTO userDTO = new UserDTO();
-            userDTO.setFullName(fullName);
-            userDTO.setUsername(username);
-            userDTO.setEmail(email);
-            userDTO.setPassword(password);
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.setFullName(fullName);
+                    userDTO.setUsername(username);
+                    userDTO.setEmail(email);
+                    userDTO.setPassword(password);
 
-            try {
-                boolean isSaved = signupBO.saveUser(userDTO);
-                if (isSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Sign up successful").show();
-                    clearComponents();
+                    try {
+                        boolean isSaved = signupBO.saveUser(userDTO);
+                        if (isSaved) {
+                            new Alert(Alert.AlertType.CONFIRMATION, "Sign up successful").show();
+                            clearComponents();
+                        } else {
+                            new Alert(Alert.AlertType.WARNING, "Sign up unsuccessful").show();
+                        }
+                    } catch (SQLException | IOException e) {
+                        e.printStackTrace();
+                    }
                 }else{
-                    new Alert(Alert.AlertType.WARNING,"Sign up unsuccessful").show();
+                    new Alert(Alert.AlertType.WARNING,"Invalid email").show();
                 }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
+            }else{
+                new Alert(Alert.AlertType.WARNING,"Invalid name.").show();
             }
         }else {
             new Alert(Alert.AlertType.WARNING,"Please fill all fields").show();
