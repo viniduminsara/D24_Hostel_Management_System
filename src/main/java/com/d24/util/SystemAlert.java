@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
-import java.net.URL;
 
 public class SystemAlert extends Alert{
 

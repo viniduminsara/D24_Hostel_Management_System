@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,29 +18,28 @@
             <Font name="Comic Sans MS" size="36.0" />
          </font>
       </Label>
-      <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="131.0" prefHeight="32.0" prefWidth="488.0" promptText="student Id (Campus Id)" unFocusColor="#9170cb">
+      <JFXTextField fx:id="txtStudentId" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="131.0" prefHeight="32.0" prefWidth="488.0" promptText="Student Id (Campus Id)" unFocusColor="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="196.0" prefHeight="32.0" prefWidth="488.0" promptText="student name" unFocusColor="#9170cb">
+      <JFXTextField fx:id="txtName" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="196.0" prefHeight="32.0" prefWidth="488.0" promptText="Student name" unFocusColor="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="273.0" prefHeight="32.0" prefWidth="488.0" promptText="student address" unFocusColor="#9170cb">
+      <JFXTextField fx:id="txtAddress" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="273.0" prefHeight="32.0" prefWidth="488.0" promptText="Student address" unFocusColor="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="351.0" prefHeight="32.0" prefWidth="488.0" promptText="contact number" unFocusColor="#9170cb">
+      <JFXTextField fx:id="txtContact" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="351.0" prefHeight="32.0" prefWidth="488.0" promptText="Contact number" unFocusColor="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker defaultColor="#9170cb" layoutX="55.0" layoutY="425.0" prefHeight="32.0" prefWidth="488.0" promptText="date of birth" showWeekNumbers="true" styleClass="font_change" />
-      <JFXComboBox focusColor="#9170cb" labelFloat="true" layoutX="55.0" layoutY="500.0" prefHeight="31.0" prefWidth="250.0" promptText="gender" styleClass="font_change" unFocusColor="#9170cb" />
-      <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="574.0" prefHeight="47.0" prefWidth="488.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
+      <JFXDatePicker fx:id="datepicker" defaultColor="#9170cb" layoutX="55.0" layoutY="425.0" prefHeight="32.0" prefWidth="488.0" promptText="Date of Birth" showWeekNumbers="true" styleClass="font_change" />
+      <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="574.0" onAction="#btnSaveOnAction" prefHeight="47.0" prefWidth="488.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font>
@@ -51,5 +51,23 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <JFXRadioButton fx:id="rbMale" layoutX="55.0" layoutY="518.0" text="Male">
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup>
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="rbFemale" layoutX="153.0" layoutY="518.0" text="Female" toggleGroup="$gender">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </JFXRadioButton>
+      <Label layoutX="53.0" layoutY="485.0" text="Gender">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
