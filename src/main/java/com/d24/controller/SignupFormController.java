@@ -5,6 +5,7 @@ import com.d24.bo.custom.SignupBO;
 import com.d24.bo.custom.impl.SignupBOImpl;
 import com.d24.dto.UserDTO;
 import com.d24.util.RegExPatterns;
+import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -101,22 +103,22 @@ public class SignupFormController {
                     try {
                         boolean isSaved = signupBO.saveUser(userDTO);
                         if (isSaved) {
-                            new Alert(Alert.AlertType.CONFIRMATION, "Sign up successful").show();
+                            new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Sign up successful", ButtonType.OK).show();
                             clearComponents();
                         } else {
-                            new Alert(Alert.AlertType.WARNING, "Sign up unsuccessful").show();
+                            new SystemAlert(Alert.AlertType.WARNING,"Warning","Sign up unsuccessful", ButtonType.OK).show();
                         }
                     } catch (SQLException | IOException e) {
                         e.printStackTrace();
                     }
                 }else{
-                    new Alert(Alert.AlertType.WARNING,"Invalid email").show();
+                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Invalid email", ButtonType.OK).show();
                 }
             }else{
-                new Alert(Alert.AlertType.WARNING,"Invalid name.").show();
+                new SystemAlert(Alert.AlertType.WARNING,"Warning","Invalid name.", ButtonType.OK).show();
             }
         }else {
-            new Alert(Alert.AlertType.WARNING,"Please fill all fields").show();
+            new SystemAlert(Alert.AlertType.WARNING,"Warning","Please fill all fields", ButtonType.OK).show();
         }
     }
 

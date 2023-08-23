@@ -1,5 +1,8 @@
 package com.d24.util;
 
+import com.d24.entity.Reservation;
+import com.d24.entity.Room;
+import com.d24.entity.Student;
 import com.d24.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +28,10 @@ public class FactoryConfiguration {
 
         //add properties to configuration
         configuration.addProperties(properties);
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(User.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Room.class)
+                .addAnnotatedClass(Reservation.class);
 
         //build session factory
         sessionFactory = configuration.buildSessionFactory();
