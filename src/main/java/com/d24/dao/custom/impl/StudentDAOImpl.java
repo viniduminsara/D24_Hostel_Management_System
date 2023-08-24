@@ -5,10 +5,11 @@ import com.d24.entity.Student;
 import com.d24.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
     @Override
@@ -44,7 +45,19 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public ArrayList<Student> getAll() throws SQLException {
-        return null;
+    public List<Student> getAll() throws SQLException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try{
+            Query query = session.createQuery("from Student");
+            return (List<Student>) query.list();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
     }
 }

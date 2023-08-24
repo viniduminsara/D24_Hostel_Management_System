@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -45,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public ArrayList<User> getAll() throws SQLException {
+    public List<User> getAll() throws SQLException {
         return null;
     }
 }

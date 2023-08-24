@@ -2,7 +2,7 @@ package com.d24.dao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CrudDAO<T,ID> extends SuperDAO{
 
@@ -14,6 +14,6 @@ public interface CrudDAO<T,ID> extends SuperDAO{
 
     boolean exists(ID id) throws SQLException;
 
-    ArrayList<T> getAll() throws SQLException;
+    List<T> getAll() throws SQLException, IOException;
 
 }

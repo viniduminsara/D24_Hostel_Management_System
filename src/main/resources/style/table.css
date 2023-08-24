@@ -76,13 +76,24 @@
     -fx-background-color: transparent;
 }
 
-.infoBtn{
-    -fx-background-color:  transparent;
+.EditBtn{
+    -fx-background-color:  orange;
     -fx-text-fill: white;
     -fx-background-radius: 10px;
     -fx-alignment: center;
 }
 
-.infoBtn:hover{
+.EditBtn:hover{
+    -fx-opacity: 80%;
+}
+
+.RemoveBtn{
+    -fx-background-color:  red;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+}
+
+.RemoveBtn:hover{
     -fx-opacity: 80%;
 }

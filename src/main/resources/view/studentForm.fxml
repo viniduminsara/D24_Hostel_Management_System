@@ -41,7 +41,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXButton graphicTextGap="8.0" layoutX="920.0" layoutY="109.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Add New Student" textFill="WHITE">
+      <JFXButton graphicTextGap="8.0" layoutX="920.0" layoutY="109.0" onAction="#btnAddOnAction" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: #5f4194; -fx-background-radius: 10px;" text="Add New Student" textFill="WHITE" AnchorPane.bottomAnchor="578.0" AnchorPane.leftAnchor="920.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="109.0">
          <font>
             <Font name="Comic Sans MS" size="18.0" />
          </font>
