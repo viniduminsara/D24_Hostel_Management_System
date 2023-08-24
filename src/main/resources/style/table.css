@@ -24,7 +24,8 @@
     -fx-text-fill: black;
     -fx-alignment: center;
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-border-color: rgba(95, 65, 148, 0.3);
+    -fx-border-width: 0px 3px 1px 0px;
 }
 
 .table-view .table-row-cell{
@@ -77,7 +78,7 @@
 }
 
 .EditBtn{
-    -fx-background-color:  orange;
+    -fx-background-color:  #edae49;
     -fx-text-fill: white;
     -fx-background-radius: 10px;
     -fx-alignment: center;
@@ -88,10 +89,11 @@
 }
 
 .RemoveBtn{
-    -fx-background-color:  red;
+    -fx-background-color:  #e63946;
     -fx-text-fill: white;
     -fx-background-radius: 10px;
     -fx-alignment: center;
+    -fx-font-weight: 600;
 }
 
 .RemoveBtn:hover{

@@ -19,12 +19,12 @@
       </Label>
       <TableView fx:id="tblStudent" layoutX="50.0" layoutY="181.0" prefHeight="513.0" prefWidth="1081.0">
         <columns>
-          <TableColumn fx:id="colStudentId" prefWidth="141.0" text="Student Id" />
-          <TableColumn fx:id="colName" prefWidth="239.0" text="Name" />
-            <TableColumn fx:id="colAddress" prefWidth="256.0" text="Address" />
-            <TableColumn fx:id="colContact" prefWidth="187.0" text="Contact" />
-            <TableColumn fx:id="colGender" prefWidth="116.0" text="Gender" />
-            <TableColumn fx:id="colAction" prefWidth="141.0" text="Action" />
+          <TableColumn fx:id="colStudentId" prefWidth="127.0" text="Student Id" />
+          <TableColumn fx:id="colName" prefWidth="196.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="240.0" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="161.0" text="Contact" />
+            <TableColumn fx:id="colGender" prefWidth="141.0" text="Gender" />
+            <TableColumn fx:id="colAction" prefWidth="215.0" text="Action" />
         </columns>
       </TableView>
       <AnchorPane layoutX="54.0" layoutY="90.0" prefHeight="64.0" prefWidth="379.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">

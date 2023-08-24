@@ -1,6 +1,7 @@
 package com.d24.bo.custom.impl;
 
 import com.d24.bo.custom.StudentBO;
+import com.d24.dao.Convertor;
 import com.d24.dao.custom.StudentDAO;
 import com.d24.dao.custom.impl.StudentDAOImpl;
 import com.d24.dto.StudentDTO;
@@ -17,14 +18,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean saveStudent(StudentDTO studentDTO) throws SQLException, IOException {
-        Student student = new Student();
-        student.setStudentId(studentDTO.getStudentId());
-        student.setName(studentDTO.getName());
-        student.setAddress(studentDTO.getAddress());
-        student.setContactNo(studentDTO.getContactNo());
-        student.setDob(studentDTO.getDob());
-        student.setGender(studentDTO.getGender());
-
+        Student student = Convertor.toStudent(studentDTO);
         return studentDAO.add(student);
     }
 
@@ -33,17 +27,21 @@ public class StudentBOImpl implements StudentBO {
         List<Student> students = studentDAO.getAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
         for (Student student : students) {
-            StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setStudentId(student.getStudentId());
-            studentDTO.setName(student.getName());
-            studentDTO.setAddress(student.getAddress());
-            studentDTO.setContactNo(student.getContactNo());
-            studentDTO.setDob(student.getDob());
-            studentDTO.setGender(student.getGender());
-
+            StudentDTO studentDTO = Convertor.toStudentDTO(student);
             studentDTOS.add(studentDTO);
         }
 
         return studentDTOS;
+    }
+
+    @Override
+    public boolean updateStudent(StudentDTO studentDTO) throws SQLException, IOException {
+        Student student = Convertor.toStudent(studentDTO);
+        return studentDAO.update(student);
+    }
+
+    @Override
+    public boolean deleteStudent(String studentId) throws SQLException, IOException {
+        return studentDAO.delete(studentId);
     }
 }

@@ -2,8 +2,8 @@ package com.d24.controller.popup;
 
 import com.d24.bo.custom.StudentBO;
 import com.d24.bo.custom.impl.StudentBOImpl;
+import com.d24.controller.StudentFormController;
 import com.d24.dto.StudentDTO;
-import com.d24.entity.Student;
 import com.d24.util.RegExPatterns;
 import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXDatePicker;
@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,7 +46,13 @@ public class AddStudentFormController {
     @FXML
     private JFXRadioButton rbFemale;
 
+    private StudentFormController studentFormController;
+
     StudentBO studentBO = new StudentBOImpl();
+
+    public void setStudentFormController(StudentFormController studentFormController) {
+        this.studentFormController = studentFormController;
+    }
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
@@ -71,6 +78,9 @@ public class AddStudentFormController {
 
                     if (isSaved) {
                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student saved successfully", ButtonType.OK).show();
+                        Stage stage = (Stage) txtStudentId.getScene().getWindow();
+                        stage.close();
+                        studentFormController.populateStudentTable();
                     } else {
                         new SystemAlert(Alert.AlertType.WARNING, "Warning", "Student saved unsuccessfully").show();
                     }

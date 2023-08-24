@@ -8,9 +8,9 @@ public interface CrudDAO<T,ID> extends SuperDAO{
 
     boolean add(T entity) throws SQLException, IOException;
 
-    boolean delete(ID id) throws SQLException;
+    boolean delete(ID id) throws SQLException, IOException;
 
-    boolean update(T entity) throws SQLException;
+    boolean update(T entity) throws SQLException, IOException;
 
     boolean exists(ID id) throws SQLException;
 

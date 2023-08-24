@@ -30,13 +30,39 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(String s) throws SQLException {
-        return false;
+    public boolean delete(String s) throws SQLException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("delete from Student where studentId=?1");
+            query.setParameter(1, s);
+            int update = query.executeUpdate();
+            transaction.commit();
+            return update > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public boolean update(Student entity) throws SQLException {
-        return false;
+    public boolean update(Student entity) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.merge(entity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

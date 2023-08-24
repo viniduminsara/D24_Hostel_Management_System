@@ -64,10 +64,7 @@
             <Font name="Comic Sans MS" size="15.0" />
          </font>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="rbFemale" layoutX="148.0" layoutY="514.0" text="Female">
-         <toggleGroup>
-            <ToggleGroup fx:id="gender1" />
-         </toggleGroup>
+      <JFXRadioButton fx:id="rbFemale" layoutX="148.0" layoutY="514.0" text="Female" toggleGroup="$gender">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
