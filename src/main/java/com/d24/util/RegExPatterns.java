@@ -7,7 +7,7 @@ public class RegExPatterns {
     private static final Pattern namePattern = Pattern.compile("^[a-zA-Z '.-]{4,}$");
     private static final Pattern emailPattern = Pattern.compile("(^[a-zA-Z0-9_.-]+)@([a-zA-Z]+)([\\.])(com)$");
     private static final Pattern doublePattern = Pattern.compile("^[0-9]+\\.?[0-9]*$");
-    private static final Pattern intPattern = Pattern.compile("^[1-9][0-9]?$|^100$");
+    private static final Pattern intPattern = Pattern.compile("^[1-9]\\d*$");
     private static final Pattern contactPattern = Pattern.compile("^0[0-9]{9}$");
 
     public static Pattern getNamePattern() {

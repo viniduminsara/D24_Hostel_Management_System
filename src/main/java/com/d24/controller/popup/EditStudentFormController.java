@@ -4,6 +4,7 @@ import com.d24.bo.custom.StudentBO;
 import com.d24.bo.custom.impl.StudentBOImpl;
 import com.d24.controller.StudentFormController;
 import com.d24.dto.StudentDTO;
+import com.d24.util.RegExPatterns;
 import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
@@ -55,33 +56,37 @@ public class EditStudentFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         if (!(txtName.getText().isEmpty() || txtAddress.getText().isEmpty() || txtContact.getText().isEmpty())){
-            String gender = null;
-            if (rbMale.isSelected()) {
-                gender = rbMale.getText();
-            } else if (rbFemale.isSelected()) {
-                gender = rbFemale.getText();
-            }
-            StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setStudentId(lblId.getText());
-            studentDTO.setName(txtName.getText());
-            studentDTO.setAddress(txtAddress.getText());
-            studentDTO.setContactNo(txtContact.getText());
-            studentDTO.setDob(datepicker.getValue());
-            studentDTO.setGender(gender);
-
-            try {
-                boolean isUpdated = studentBO.updateStudent(studentDTO);
-                if (isUpdated){
-                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Student update successful",ButtonType.OK).show();
-                    Stage stage = (Stage) txtName.getScene().getWindow();
-                    stage.close();
-                    studentFormController.populateStudentTable();
-                    studentFormController.searchFilter();
-                }else{
-                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Failed to update the student",ButtonType.OK).show();
+            if (RegExPatterns.getContactPattern().matcher(txtContact.getText()).matches()) {
+                String gender = null;
+                if (rbMale.isSelected()) {
+                    gender = rbMale.getText();
+                } else if (rbFemale.isSelected()) {
+                    gender = rbFemale.getText();
                 }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
+                StudentDTO studentDTO = new StudentDTO();
+                studentDTO.setStudentId(lblId.getText());
+                studentDTO.setName(txtName.getText());
+                studentDTO.setAddress(txtAddress.getText());
+                studentDTO.setContactNo(txtContact.getText());
+                studentDTO.setDob(datepicker.getValue());
+                studentDTO.setGender(gender);
+
+                try {
+                    boolean isUpdated = studentBO.updateStudent(studentDTO);
+                    if (isUpdated) {
+                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student update successful", ButtonType.OK).show();
+                        Stage stage = (Stage) txtName.getScene().getWindow();
+                        stage.close();
+                        studentFormController.populateStudentTable();
+                        studentFormController.searchFilter();
+                    } else {
+                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the student", ButtonType.OK).show();
+                    }
+                } catch (SQLException | IOException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please enter correct contact number").show();
             }
         }else{
             new SystemAlert(Alert.AlertType.WARNING,"Warning","Please fill all details", ButtonType.OK).show();

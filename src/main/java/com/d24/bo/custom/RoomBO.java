@@ -11,4 +11,6 @@ public interface RoomBO extends SuperBO {
     List<RoomDTO> getAllRooms() throws SQLException, IOException;
 
     boolean saveRoom(RoomDTO roomDTO) throws SQLException, IOException;
+
+    boolean updateRoom(RoomDTO roomDTO) throws SQLException, IOException;
 }

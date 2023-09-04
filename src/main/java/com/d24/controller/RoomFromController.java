@@ -3,6 +3,7 @@ package com.d24.controller;
 import com.d24.bo.custom.RoomBO;
 import com.d24.bo.custom.impl.RoomBOImpl;
 import com.d24.controller.popup.AddRoomFormController;
+import com.d24.controller.popup.EditRoomFormController;
 import com.d24.dto.RoomDTO;
 import com.d24.tm.RoomTM;
 import com.jfoenix.controls.JFXButton;
@@ -106,6 +107,22 @@ public class RoomFromController {
     }
 
     private void setEditBtnAction(JFXButton editBtn, RoomDTO roomDTO) {
+        editBtn.setOnAction((e) -> {
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup/editRoomForm.fxml"));
+                stage.setScene(new Scene(loader.load()));
+                EditRoomFormController editRoomFormController = loader.getController();
+                editRoomFormController.setDetails(roomDTO);
+                editRoomFormController.setRoomController(this);
+                stage.setTitle("Edit Room");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.centerOnScreen();
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     @FXML

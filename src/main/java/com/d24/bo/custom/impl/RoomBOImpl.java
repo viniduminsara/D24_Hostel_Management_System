@@ -6,7 +6,6 @@ import com.d24.dao.custom.RoomDAO;
 import com.d24.dao.custom.impl.RoomDAOImpl;
 import com.d24.dto.RoomDTO;
 import com.d24.entity.Room;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,5 +28,10 @@ public class RoomBOImpl implements RoomBO {
     @Override
     public boolean saveRoom(RoomDTO roomDTO) throws SQLException, IOException {
         return roomDAO.add(Convertor.toRoom(roomDTO));
+    }
+
+    @Override
+    public boolean updateRoom(RoomDTO roomDTO) throws SQLException, IOException {
+        return roomDAO.update(Convertor.toRoom(roomDTO));
     }
 }
