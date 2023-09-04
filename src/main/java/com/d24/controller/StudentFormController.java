@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +58,8 @@ public class StudentFormController {
 
     StudentBO studentBO = new StudentBOImpl();
 
+    ObservableList<StudentTM> studentTMS = FXCollections.observableArrayList();
+
     public void initialize(){
 
         //set value factory for table
@@ -67,27 +71,30 @@ public class StudentFormController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("actionBtn"));
 
         populateStudentTable();
+        searchFilter();
     }
 
     public void populateStudentTable() {
         try {
             List<StudentDTO> studentDTOS = studentBO.getAllStudents();
-            ObservableList<StudentTM> studentTMS = FXCollections.observableArrayList();
+            studentTMS.clear();
             for (StudentDTO studentDTO : studentDTOS) {
-                ImageView editImageView = new ImageView("/img/table/update.png");
-                editImageView.setFitWidth(22); // Set the width to 22px
-                editImageView.setFitHeight(22);
-                JFXButton editBtn = new JFXButton("Edit",editImageView);
+
+                //create edit button
+                JFXButton editBtn = new JFXButton("Edit",new ImageView("/img/table/update.png"));
+                editBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 editBtn.getStyleClass().add("EditBtn");
-                editBtn.setPrefSize(80,40);
+                editBtn.setPrefSize(50,40);
                 setEditBtnAction(editBtn,studentDTO);
-                ImageView removeImageView = new ImageView("/img/table/remove.png");
-                removeImageView.setFitWidth(18); // Set the width to 22px
-                removeImageView.setFitHeight(18);
-                JFXButton removeBtn = new JFXButton("remove",removeImageView);
+
+                //create remove button
+                JFXButton removeBtn = new JFXButton("remove",new ImageView("/img/table/remove.png"));
+                removeBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 removeBtn.getStyleClass().add("RemoveBtn");
-                removeBtn.setPrefSize(80,40);
+                removeBtn.setPrefSize(50,40);
                 setRemoveBtnAction(removeBtn,studentDTO);
+
+                //add buttons to hbox
                 HBox hBox = new HBox(editBtn,removeBtn);
                 hBox.setAlignment(Pos.CENTER);
                 hBox.setSpacing(15);
@@ -104,6 +111,33 @@ public class StudentFormController {
         }
     }
 
+    public void searchFilter(){
+        FilteredList<StudentTM> filteredData = new FilteredList<>(studentTMS, b -> true);
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredData.setPredicate(StudentTM -> {
+                if (newValue.isEmpty() || newValue.isBlank()){
+                    return true;
+                }
+                String searchKeyword = newValue.toLowerCase();
+
+                if (StudentTM.getStudentId().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }else if(StudentTM.getName().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(StudentTM.getAddress().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            });
+        });
+
+        SortedList<StudentTM> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tblStudent.comparatorProperty());
+        tblStudent.setItems(sortedData);
+    }
+
     private void setRemoveBtnAction(JFXButton removeBtn, StudentDTO student) {
         removeBtn.setOnAction((e) -> {
             ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
@@ -118,8 +152,9 @@ public class StudentFormController {
                     if (isDeleted){
                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student deleted successfully", ButtonType.OK).show();
                         populateStudentTable();
+                        searchFilter();
                     }else{
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Student delete unsuccessful").show();
+                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the student").show();
                     }
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();

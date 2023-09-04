@@ -44,4 +44,9 @@ public class StudentBOImpl implements StudentBO {
     public boolean deleteStudent(String studentId) throws SQLException, IOException {
         return studentDAO.delete(studentId);
     }
+
+    @Override
+    public boolean existCustomer(String studentId) throws SQLException, IOException {
+        return studentDAO.exists(studentId);
+    }
 }

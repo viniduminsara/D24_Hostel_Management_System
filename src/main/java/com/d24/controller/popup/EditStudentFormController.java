@@ -76,8 +76,9 @@ public class EditStudentFormController {
                     Stage stage = (Stage) txtName.getScene().getWindow();
                     stage.close();
                     studentFormController.populateStudentTable();
+                    studentFormController.searchFilter();
                 }else{
-                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Student update unsuccessful",ButtonType.OK).show();
+                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Failed to update the student",ButtonType.OK).show();
                 }
             } catch (SQLException | IOException e) {
                 e.printStackTrace();

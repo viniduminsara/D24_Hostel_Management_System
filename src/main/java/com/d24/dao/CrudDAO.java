@@ -12,7 +12,7 @@ public interface CrudDAO<T,ID> extends SuperDAO{
 
     boolean update(T entity) throws SQLException, IOException;
 
-    boolean exists(ID id) throws SQLException;
+    boolean exists(ID id) throws SQLException, IOException;
 
     List<T> getAll() throws SQLException, IOException;
 

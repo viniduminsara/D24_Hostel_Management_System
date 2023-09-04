@@ -13,7 +13,7 @@ import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
     @Override
-    public boolean add(Student entity) throws SQLException, IOException {
+    public boolean add(Student entity) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -30,7 +30,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(String s) throws SQLException, IOException {
+    public boolean delete(String s) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -42,6 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
             return update > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            transaction.rollback();
             return false;
         } finally {
             session.close();
@@ -59,6 +60,7 @@ public class StudentDAOImpl implements StudentDAO {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            transaction.rollback();
             return false;
         } finally {
             session.close();
@@ -66,12 +68,27 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean exists(String s) throws SQLException {
-        return false;
+    public boolean exists(String s) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("select studentId from Student where studentId = ?1");
+            query.setParameter(1, s);
+            String studentId = (String) query.uniqueResult();
+            transaction.commit();
+            return studentId != null;
+        }catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
-    public List<Student> getAll() throws SQLException, IOException {
+    public List<Student> getAll() throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 

@@ -64,28 +64,40 @@ public class AddStudentFormController {
                 } else if (rbFemale.isSelected()) {
                     gender = rbFemale.getText();
                 }
-
-                StudentDTO studentDTO = new StudentDTO();
-                studentDTO.setStudentId(txtStudentId.getText());
-                studentDTO.setName(txtName.getText());
-                studentDTO.setAddress(txtAddress.getText());
-                studentDTO.setContactNo(txtContact.getText());
-                studentDTO.setDob(datepicker.getValue());
-                studentDTO.setGender(gender);
-
+                boolean isExists = false;
                 try {
-                    boolean isSaved = studentBO.saveStudent(studentDTO);
-
-                    if (isSaved) {
-                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student saved successfully", ButtonType.OK).show();
-                        Stage stage = (Stage) txtStudentId.getScene().getWindow();
-                        stage.close();
-                        studentFormController.populateStudentTable();
-                    } else {
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Student saved unsuccessfully").show();
-                    }
+                    isExists = studentBO.existCustomer(txtStudentId.getText());
                 } catch (SQLException | IOException e) {
                     e.printStackTrace();
+                }
+
+                if (!isExists) {
+
+                    StudentDTO studentDTO = new StudentDTO();
+                    studentDTO.setStudentId(txtStudentId.getText());
+                    studentDTO.setName(txtName.getText());
+                    studentDTO.setAddress(txtAddress.getText());
+                    studentDTO.setContactNo(txtContact.getText());
+                    studentDTO.setDob(datepicker.getValue());
+                    studentDTO.setGender(gender);
+
+                    try {
+                        boolean isSaved = studentBO.saveStudent(studentDTO);
+
+                        if (isSaved) {
+                            new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student saved successfully", ButtonType.OK).show();
+                            Stage stage = (Stage) txtStudentId.getScene().getWindow();
+                            stage.close();
+                            studentFormController.populateStudentTable();
+                            studentFormController.searchFilter();
+                        } else {
+                            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the student").show();
+                        }
+                    } catch (SQLException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", txtStudentId.getText()+" already exists").show();
                 }
             }else{
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please enter correct contact number").show();

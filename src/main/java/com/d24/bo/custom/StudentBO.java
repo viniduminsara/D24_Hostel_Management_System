@@ -15,4 +15,6 @@ public interface StudentBO extends SuperBO {
     boolean updateStudent(StudentDTO studentDTO) throws SQLException, IOException;
 
     boolean deleteStudent(String studentId) throws SQLException, IOException;
+
+    boolean existCustomer(String studentId) throws SQLException, IOException;
 }
