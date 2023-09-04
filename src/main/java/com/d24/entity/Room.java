@@ -22,7 +22,7 @@ public class Room {
     @Id
     private String roomTypeId;
     private String type;
-    private String keyMoney;
+    private Double keyMoney;
     private Integer qty;
 
     @OneToMany(mappedBy = "room")

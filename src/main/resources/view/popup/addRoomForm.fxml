@@ -15,27 +15,27 @@
                 <Font name="Comic Sans MS" size="36.0" />
             </font>
         </Label>
-        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="131.0" prefHeight="32.0" prefWidth="484.0" promptText="room type Id" unFocusColor="#9170cb">
+        <JFXTextField fx:id="txtRoomId" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="131.0" prefHeight="32.0" prefWidth="484.0" promptText="room type Id" unFocusColor="#9170cb">
             <font>
                 <Font name="Comic Sans MS" size="15.0" />
             </font>
         </JFXTextField>
-        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="196.0" prefHeight="32.0" prefWidth="484.0" promptText="type" unFocusColor="#9170cb">
+        <JFXTextField fx:id="txtType" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="196.0" prefHeight="32.0" prefWidth="484.0" promptText="type" unFocusColor="#9170cb">
             <font>
                 <Font name="Comic Sans MS" size="15.0" />
             </font>
         </JFXTextField>
-        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="273.0" prefHeight="32.0" prefWidth="484.0" promptText="keymoney" unFocusColor="#9170cb">
+        <JFXTextField fx:id="txtKeymoney" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="273.0" prefHeight="32.0" prefWidth="484.0" promptText="keymoney" unFocusColor="#9170cb">
             <font>
                 <Font name="Comic Sans MS" size="15.0" />
             </font>
         </JFXTextField>
-        <JFXTextField focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="351.0" prefHeight="32.0" prefWidth="484.0" promptText="qty" unFocusColor="#9170cb">
+        <JFXTextField fx:id="txtQty" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="351.0" prefHeight="32.0" prefWidth="484.0" promptText="qty" unFocusColor="#9170cb">
             <font>
                 <Font name="Comic Sans MS" size="15.0" />
             </font>
         </JFXTextField>
-        <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="447.0" prefHeight="47.0" prefWidth="484.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
+        <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="447.0" onAction="#btnSaveOnAction" prefHeight="47.0" prefWidth="484.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
             <font>
                 <Font name="Comic Sans MS Bold" size="20.0" />
             </font>

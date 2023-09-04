@@ -1,7 +1,7 @@
 package com.d24.bo.custom.impl;
 
 import com.d24.bo.custom.StudentBO;
-import com.d24.dao.Convertor;
+import com.d24.bo.Convertor;
 import com.d24.dao.custom.StudentDAO;
 import com.d24.dao.custom.impl.StudentDAOImpl;
 import com.d24.dto.StudentDTO;

@@ -17,18 +17,18 @@
                 <Font name="Comic Sans MS Bold" size="35.0" />
             </font>
         </Label>
-        <TableView layoutX="50.0" layoutY="181.0" prefHeight="513.0" prefWidth="1081.0">
+        <TableView fx:id="tblRooms" layoutX="50.0" layoutY="181.0" prefHeight="513.0" prefWidth="1081.0">
             <columns>
-                <TableColumn prefWidth="232.0" text="Room Type Id" />
-                <TableColumn prefWidth="297.0" text="Type" />
-                <TableColumn prefWidth="256.0" text="Keymoney" />
-                <TableColumn prefWidth="124.0" text="qty" />
-                <TableColumn prefWidth="160.0" text="Action" />
+                <TableColumn fx:id="colRoomId" prefWidth="232.0" text="Room Type Id" />
+                <TableColumn fx:id="colType" prefWidth="297.0" text="Type" />
+                <TableColumn fx:id="colKeymoney" prefWidth="256.0" text="Keymoney" />
+                <TableColumn fx:id="colQty" prefWidth="124.0" text="qty" />
+                <TableColumn fx:id="colAction" prefWidth="168.0" text="Action" />
             </columns>
         </TableView>
         <AnchorPane layoutX="54.0" layoutY="90.0" prefHeight="64.0" prefWidth="379.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
             <children>
-                <JFXTextField focusColor="#9170cb" layoutX="66.0" layoutY="11.0" prefHeight="37.0" prefWidth="293.0" promptText="Search" unFocusColor="#9170cb">
+                <JFXTextField fx:id="txtSearch" focusColor="#9170cb" layoutX="66.0" layoutY="11.0" prefHeight="37.0" prefWidth="293.0" promptText="Search" unFocusColor="#9170cb">
                     <font>
                         <Font name="Comic Sans MS" size="15.0" />
                     </font>

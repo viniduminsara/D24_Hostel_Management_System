@@ -23,8 +23,8 @@
           <TableColumn fx:id="colName" prefWidth="196.0" text="Name" />
             <TableColumn fx:id="colAddress" prefWidth="240.0" text="Address" />
             <TableColumn fx:id="colContact" prefWidth="161.0" text="Contact" />
-            <TableColumn fx:id="colGender" prefWidth="141.0" text="Gender" />
-            <TableColumn fx:id="colAction" prefWidth="215.0" text="Action" />
+            <TableColumn fx:id="colGender" prefWidth="161.0" text="Gender" />
+            <TableColumn fx:id="colAction" prefWidth="195.0" text="Action" />
         </columns>
       </TableView>
       <AnchorPane layoutX="54.0" layoutY="90.0" prefHeight="64.0" prefWidth="379.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
