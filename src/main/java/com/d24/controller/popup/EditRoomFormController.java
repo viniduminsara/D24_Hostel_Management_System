@@ -68,6 +68,7 @@ public class EditRoomFormController {
                         Stage stage = (Stage) txtQty.getScene().getWindow();
                         stage.close();
                         roomFromController.populateRoomTable();
+                        roomFromController.searchFilter();
                     }else{
                         new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the room").show();
                     }

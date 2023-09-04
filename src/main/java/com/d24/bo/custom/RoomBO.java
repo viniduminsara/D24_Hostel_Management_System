@@ -13,4 +13,8 @@ public interface RoomBO extends SuperBO {
     boolean saveRoom(RoomDTO roomDTO) throws SQLException, IOException;
 
     boolean updateRoom(RoomDTO roomDTO) throws SQLException, IOException;
+
+    boolean deleteStudent(String roomTypeId) throws SQLException, IOException;
+
+    boolean existRoom(String text) throws SQLException, IOException;
 }

@@ -66,7 +66,7 @@ public class AddStudentFormController {
                 }
                 boolean isExists = false;
                 try {
-                    isExists = studentBO.existCustomer(txtStudentId.getText());
+                    isExists = studentBO.existStudent(txtStudentId.getText());
                 } catch (SQLException | IOException e) {
                     e.printStackTrace();
                 }

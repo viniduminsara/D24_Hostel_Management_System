@@ -34,4 +34,14 @@ public class RoomBOImpl implements RoomBO {
     public boolean updateRoom(RoomDTO roomDTO) throws SQLException, IOException {
         return roomDAO.update(Convertor.toRoom(roomDTO));
     }
+
+    @Override
+    public boolean deleteStudent(String roomTypeId) throws SQLException, IOException {
+        return roomDAO.delete(roomTypeId);
+    }
+
+    @Override
+    public boolean existRoom(String roomId) throws SQLException, IOException {
+        return roomDAO.exists(roomId);
+    }
 }

@@ -50,19 +50,32 @@ public class AddRoomFormController {
                     roomDTO.setKeyMoney(Double.valueOf(txtKeymoney.getText()));
                     roomDTO.setQty(Integer.valueOf(txtQty.getText()));
 
-                    boolean isSaved = false;
+                    boolean isExists = false;
                     try {
-                        isSaved = roomBO.saveRoom(roomDTO);
+                        isExists = roomBO.existRoom(txtRoomId.getText());
                     } catch (SQLException | IOException e) {
                         e.printStackTrace();
                     }
-                    if (isSaved){
-                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room saved successfully", ButtonType.OK).show();
-                        Stage stage = (Stage) txtRoomId.getScene().getWindow();
-                        stage.close();
-                        roomFromController.populateRoomTable();
+
+                    if (!isExists) {
+
+                        boolean isSaved = false;
+                        try {
+                            isSaved = roomBO.saveRoom(roomDTO);
+                        } catch (SQLException | IOException e) {
+                            e.printStackTrace();
+                        }
+                        if (isSaved) {
+                            new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room saved successfully", ButtonType.OK).show();
+                            Stage stage = (Stage) txtRoomId.getScene().getWindow();
+                            stage.close();
+                            roomFromController.populateRoomTable();
+                            roomFromController.searchFilter();
+                        } else {
+                            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the room").show();
+                        }
                     }else{
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the room").show();
+                        new SystemAlert(Alert.AlertType.WARNING, "Warning", txtRoomId.getText()+" already exists").show();
                     }
                 }else{
                     new SystemAlert(Alert.AlertType.WARNING, "Warning", txtQty.getText()+" is not an integer value").show();

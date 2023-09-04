@@ -6,27 +6,30 @@ import com.d24.controller.popup.AddRoomFormController;
 import com.d24.controller.popup.EditRoomFormController;
 import com.d24.dto.RoomDTO;
 import com.d24.tm.RoomTM;
+import com.d24.tm.StudentTM;
+import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class RoomFromController {
 
@@ -65,6 +68,7 @@ public class RoomFromController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("hBox"));
 
         populateRoomTable();
+        searchFilter();
     }
 
     public void populateRoomTable() {
@@ -103,7 +107,53 @@ public class RoomFromController {
         }
     }
 
+    public void searchFilter(){
+        FilteredList<RoomTM> filteredData = new FilteredList<>(roomTMS, b -> true);
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredData.setPredicate(RoomTM -> {
+                if (newValue.isEmpty() || newValue.isBlank()){
+                    return true;
+                }
+                String searchKeyword = newValue.toLowerCase();
+
+                if (RoomTM.getRoomTypeId().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }else if(RoomTM.getType().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<RoomTM> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tblRooms.comparatorProperty());
+        tblRooms.setItems(sortedData);
+    }
+
     private void setRemoveBtnAction(JFXButton removeBtn, RoomDTO roomDTO) {
+        removeBtn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No",ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new SystemAlert(Alert.AlertType.INFORMATION,"Information","Do you want to delete '"+roomDTO.getType()+"' student?",yes,no).showAndWait();
+
+            if (result.orElse(no) == yes){
+                //delete student
+                try {
+                    boolean isDeleted = roomBO.deleteStudent(roomDTO.getRoomTypeId());
+                    if (isDeleted){
+                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room deleted successfully", ButtonType.OK).show();
+                        populateRoomTable();
+                        searchFilter();
+                    }else{
+                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the room").show();
+                    }
+                } catch (SQLException | IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private void setEditBtnAction(JFXButton editBtn, RoomDTO roomDTO) {

@@ -31,7 +31,22 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public boolean delete(String s) throws SQLException, IOException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("delete from Room where roomTypeId=?1");
+            query.setParameter(1, s);
+            int update = query.executeUpdate();
+            transaction.commit();
+            return update > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -54,7 +69,22 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public boolean exists(String s) throws SQLException, IOException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("select roomTypeId from Room where roomTypeId = ?1");
+            query.setParameter(1, s);
+            String studentId = (String) query.uniqueResult();
+            transaction.commit();
+            return studentId != null;
+        }catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
