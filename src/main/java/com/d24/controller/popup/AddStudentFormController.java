@@ -17,8 +17,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class AddStudentFormController {
 
@@ -64,13 +62,8 @@ public class AddStudentFormController {
                 } else if (rbFemale.isSelected()) {
                     gender = rbFemale.getText();
                 }
-                boolean isExists = false;
-                try {
-                    isExists = studentBO.existStudent(txtStudentId.getText());
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
 
+                boolean isExists = studentBO.existStudent(txtStudentId.getText());
                 if (!isExists) {
 
                     StudentDTO studentDTO = new StudentDTO();
@@ -81,21 +74,18 @@ public class AddStudentFormController {
                     studentDTO.setDob(datepicker.getValue());
                     studentDTO.setGender(gender);
 
-                    try {
-                        boolean isSaved = studentBO.saveStudent(studentDTO);
+                    boolean isSaved = studentBO.saveStudent(studentDTO);
 
-                        if (isSaved) {
-                            new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student saved successfully", ButtonType.OK).show();
-                            Stage stage = (Stage) txtStudentId.getScene().getWindow();
-                            stage.close();
-                            studentFormController.populateStudentTable();
-                            studentFormController.searchFilter();
-                        } else {
-                            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the student").show();
-                        }
-                    } catch (SQLException | IOException e) {
-                        e.printStackTrace();
+                    if (isSaved) {
+                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student saved successfully", ButtonType.OK).show();
+                        Stage stage = (Stage) txtStudentId.getScene().getWindow();
+                        stage.close();
+                        studentFormController.populateStudentTable();
+                        studentFormController.searchFilter();
+                    } else {
+                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the student").show();
                     }
+
                 }else{
                     new SystemAlert(Alert.AlertType.WARNING, "Warning", txtStudentId.getText()+" already exists").show();
                 }

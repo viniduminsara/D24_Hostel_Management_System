@@ -6,15 +6,12 @@ import com.d24.dao.custom.impl.UserDAOImpl;
 import com.d24.dto.UserDTO;
 import com.d24.entity.User;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public class SignupBOImpl implements SignupBO {
 
     UserDAO userDAO = new UserDAOImpl();
 
     @Override
-    public boolean saveUser(UserDTO userDTO) throws SQLException, IOException {
+    public boolean saveUser(UserDTO userDTO){
         User user = new User();
         user.setFullName(userDTO.getFullName());
         user.setUsername(userDTO.getUsername());

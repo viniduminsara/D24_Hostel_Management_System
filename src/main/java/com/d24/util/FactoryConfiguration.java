@@ -18,13 +18,17 @@ public class FactoryConfiguration {
 
     private SessionFactory sessionFactory;
 
-    private FactoryConfiguration() throws IOException {
+    private FactoryConfiguration(){
         Configuration configuration = new Configuration();
-
-        //get properties from file
-        FileInputStream fileInputStream = new FileInputStream("src/main/resources/hibernate.properties");
         Properties properties = new Properties();
-        properties.load(fileInputStream);
+
+        try {
+            //get properties from file
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/hibernate.properties");
+            properties.load(fileInputStream);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         //add properties to configuration
         configuration.addProperties(properties);
@@ -37,7 +41,7 @@ public class FactoryConfiguration {
         sessionFactory = configuration.buildSessionFactory();
     }
 
-    public static FactoryConfiguration getInstance() throws IOException {
+    public static FactoryConfiguration getInstance(){
         return (factoryConfiguration == null) ? factoryConfiguration = new FactoryConfiguration() : factoryConfiguration;
     }
 

@@ -14,9 +14,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public class EditRoomFormController {
 
     @FXML
@@ -57,12 +54,7 @@ public class EditRoomFormController {
                     roomDTO.setKeyMoney(Double.valueOf(txtKeymoney.getText()));
                     roomDTO.setQty(Integer.valueOf(txtQty.getText()));
 
-                    boolean isUpdated = false;
-                    try {
-                        isUpdated = roomBO.updateRoom(roomDTO);
-                    } catch (SQLException | IOException e) {
-                        e.printStackTrace();
-                    }
+                    boolean isUpdated = roomBO.updateRoom(roomDTO);
                     if (isUpdated){
                         new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room updated successfully", ButtonType.OK).show();
                         Stage stage = (Stage) txtQty.getScene().getWindow();

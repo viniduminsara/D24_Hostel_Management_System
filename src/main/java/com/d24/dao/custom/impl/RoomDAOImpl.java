@@ -2,18 +2,17 @@ package com.d24.dao.custom.impl;
 
 import com.d24.dao.custom.RoomDAO;
 import com.d24.entity.Room;
+import com.d24.entity.Student;
 import com.d24.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class RoomDAOImpl implements RoomDAO {
     @Override
-    public boolean add(Room entity) throws SQLException, IOException {
+    public boolean add(Room entity){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -30,7 +29,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public boolean delete(String s) throws SQLException, IOException {
+    public boolean delete(String s){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -50,7 +49,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public boolean update(Room entity) throws SQLException, IOException {
+    public boolean update(Room entity){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -68,7 +67,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public boolean exists(String s) throws SQLException, IOException {
+    public boolean exists(String s){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -88,7 +87,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> getAll() throws SQLException, IOException {
+    public List<Room> getAll(){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -102,5 +101,25 @@ public class RoomDAOImpl implements RoomDAO {
         }finally {
             session.close();
         }
+    }
+
+    @Override
+    public Room get(String roomId) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("from Room where roomTypeId = ?1");
+            query.setParameter(1, roomId);
+            Room room = (Room) query.uniqueResult();
+            transaction.commit();
+            return room;
+        }catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+        return null;
     }
 }

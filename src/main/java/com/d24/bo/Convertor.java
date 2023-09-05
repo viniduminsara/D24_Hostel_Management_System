@@ -1,7 +1,9 @@
 package com.d24.bo;
 
+import com.d24.dto.ReservationDTO;
 import com.d24.dto.RoomDTO;
 import com.d24.dto.StudentDTO;
+import com.d24.entity.Reservation;
 import com.d24.entity.Room;
 import com.d24.entity.Student;
 
@@ -45,5 +47,24 @@ public class Convertor {
         room.setKeyMoney(roomDTO.getKeyMoney());
         room.setQty(roomDTO.getQty());
         return room;
+    }
+
+    public static ReservationDTO toReservationDTO(Reservation reservation) {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setReservationId(reservation.getReservationId());
+        reservationDTO.setDate(reservation.getDate());
+        reservationDTO.setStudent(toStudentDTO(reservation.getStudent()));
+        reservationDTO.setRoom(toRoomDTO(reservation.getRoom()));
+        reservationDTO.setStatus(reservation.getStatus());
+        return reservationDTO;
+    }
+
+    public static Reservation toReservation(ReservationDTO reservationDTO) {
+        Reservation reservation = new Reservation();
+        reservation.setDate(reservationDTO.getDate());
+        reservation.setStatus(reservationDTO.getStatus());
+        reservation.setStudent(toStudent(reservationDTO.getStudent()));
+        reservation.setRoom(toRoom(reservationDTO.getRoom()));
+        return reservation;
     }
 }

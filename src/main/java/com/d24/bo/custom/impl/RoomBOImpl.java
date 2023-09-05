@@ -16,7 +16,7 @@ public class RoomBOImpl implements RoomBO {
     RoomDAO roomDAO = new RoomDAOImpl();
 
     @Override
-    public List<RoomDTO> getAllRooms() throws SQLException, IOException {
+    public List<RoomDTO> getAllRooms(){
         List<Room> roomList = roomDAO.getAll();
         List<RoomDTO> roomDTOS = new ArrayList<>();
         for (Room room : roomList) {
@@ -26,22 +26,22 @@ public class RoomBOImpl implements RoomBO {
     }
 
     @Override
-    public boolean saveRoom(RoomDTO roomDTO) throws SQLException, IOException {
+    public boolean saveRoom(RoomDTO roomDTO){
         return roomDAO.add(Convertor.toRoom(roomDTO));
     }
 
     @Override
-    public boolean updateRoom(RoomDTO roomDTO) throws SQLException, IOException {
+    public boolean updateRoom(RoomDTO roomDTO){
         return roomDAO.update(Convertor.toRoom(roomDTO));
     }
 
     @Override
-    public boolean deleteStudent(String roomTypeId) throws SQLException, IOException {
+    public boolean deleteStudent(String roomTypeId){
         return roomDAO.delete(roomTypeId);
     }
 
     @Override
-    public boolean existRoom(String roomId) throws SQLException, IOException {
+    public boolean existRoom(String roomId){
         return roomDAO.exists(roomId);
     }
 }

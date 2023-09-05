@@ -6,15 +6,12 @@ import com.d24.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
     @Override
-    public boolean add(User entity) throws SQLException, IOException {
+    public boolean add(User entity){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -31,22 +28,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean delete(String s) throws SQLException {
+    public boolean delete(String s) {
         return false;
     }
 
     @Override
-    public boolean update(User entity) throws SQLException {
+    public boolean update(User entity) {
         return false;
     }
 
     @Override
-    public boolean exists(String s) throws SQLException {
+    public boolean exists(String s) {
         return false;
     }
 
     @Override
-    public List<User> getAll() throws SQLException {
+    public List<User> getAll() {
         return null;
     }
 }

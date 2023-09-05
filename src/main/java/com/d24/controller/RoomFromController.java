@@ -73,37 +73,33 @@ public class RoomFromController {
 
     public void populateRoomTable() {
 
-        try {
-            List<RoomDTO> roomDTOS = roomBO.getAllRooms();
-            roomTMS.clear();
-            for (RoomDTO roomDTO : roomDTOS) {
-                //create edit button
-                JFXButton editBtn = new JFXButton("Edit",new ImageView("/img/table/update.png"));
-                editBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                editBtn.getStyleClass().add("EditBtn");
-                editBtn.setPrefSize(50,40);
-                setEditBtnAction(editBtn,roomDTO);
+        List<RoomDTO> roomDTOS = roomBO.getAllRooms();
+        roomTMS.clear();
+        for (RoomDTO roomDTO : roomDTOS) {
+            //create edit button
+            JFXButton editBtn = new JFXButton("Edit",new ImageView("/img/table/update.png"));
+            editBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            editBtn.getStyleClass().add("EditBtn");
+            editBtn.setPrefSize(50,40);
+            setEditBtnAction(editBtn,roomDTO);
 
-                //create remove button
-                JFXButton removeBtn = new JFXButton("remove",new ImageView("/img/table/remove.png"));
-                removeBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                removeBtn.getStyleClass().add("RemoveBtn");
-                removeBtn.setPrefSize(50,40);
-                setRemoveBtnAction(removeBtn,roomDTO);
+            //create remove button
+            JFXButton removeBtn = new JFXButton("remove",new ImageView("/img/table/remove.png"));
+            removeBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            removeBtn.getStyleClass().add("RemoveBtn");
+            removeBtn.setPrefSize(50,40);
+            setRemoveBtnAction(removeBtn,roomDTO);
 
-                //add buttons to hbox
-                HBox hBox = new HBox(editBtn,removeBtn);
-                hBox.setAlignment(Pos.CENTER);
-                hBox.setSpacing(15);
+            //add buttons to hbox
+            HBox hBox = new HBox(editBtn,removeBtn);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setSpacing(15);
 
-                roomTMS.add(new RoomTM(roomDTO.getRoomTypeId(),
-                        roomDTO.getType(),roomDTO.getKeyMoney(),
-                        roomDTO.getQty(), hBox
-                ));
-                tblRooms.setItems(roomTMS);
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            roomTMS.add(new RoomTM(roomDTO.getRoomTypeId(),
+                    roomDTO.getType(),roomDTO.getKeyMoney(),
+                    roomDTO.getQty(), hBox
+            ));
+            tblRooms.setItems(roomTMS);
         }
     }
 
@@ -140,17 +136,13 @@ public class RoomFromController {
 
             if (result.orElse(no) == yes){
                 //delete student
-                try {
-                    boolean isDeleted = roomBO.deleteStudent(roomDTO.getRoomTypeId());
-                    if (isDeleted){
-                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room deleted successfully", ButtonType.OK).show();
-                        populateRoomTable();
-                        searchFilter();
-                    }else{
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the room").show();
-                    }
-                } catch (SQLException | IOException ex) {
-                    ex.printStackTrace();
+                boolean isDeleted = roomBO.deleteStudent(roomDTO.getRoomTypeId());
+                if (isDeleted){
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room deleted successfully", ButtonType.OK).show();
+                    populateRoomTable();
+                    searchFilter();
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the room").show();
                 }
             }
         });

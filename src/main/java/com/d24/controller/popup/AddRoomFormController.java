@@ -13,8 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class AddRoomFormController {
 
@@ -50,21 +48,10 @@ public class AddRoomFormController {
                     roomDTO.setKeyMoney(Double.valueOf(txtKeymoney.getText()));
                     roomDTO.setQty(Integer.valueOf(txtQty.getText()));
 
-                    boolean isExists = false;
-                    try {
-                        isExists = roomBO.existRoom(txtRoomId.getText());
-                    } catch (SQLException | IOException e) {
-                        e.printStackTrace();
-                    }
-
+                    boolean isExists = roomBO.existRoom(txtRoomId.getText());
                     if (!isExists) {
 
-                        boolean isSaved = false;
-                        try {
-                            isSaved = roomBO.saveRoom(roomDTO);
-                        } catch (SQLException | IOException e) {
-                            e.printStackTrace();
-                        }
+                        boolean isSaved = roomBO.saveRoom(roomDTO);
                         if (isSaved) {
                             new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Room saved successfully", ButtonType.OK).show();
                             Stage stage = (Stage) txtRoomId.getScene().getWindow();
@@ -74,6 +61,7 @@ public class AddRoomFormController {
                         } else {
                             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to save the room").show();
                         }
+
                     }else{
                         new SystemAlert(Alert.AlertType.WARNING, "Warning", txtRoomId.getText()+" already exists").show();
                     }

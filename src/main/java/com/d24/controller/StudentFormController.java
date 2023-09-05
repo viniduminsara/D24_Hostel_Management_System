@@ -75,40 +75,36 @@ public class StudentFormController {
     }
 
     public void populateStudentTable() {
-        try {
-            List<StudentDTO> studentDTOS = studentBO.getAllStudents();
-            studentTMS.clear();
-            for (StudentDTO studentDTO : studentDTOS) {
+        List<StudentDTO> studentDTOS = studentBO.getAllStudents();
+        studentTMS.clear();
+        for (StudentDTO studentDTO : studentDTOS) {
 
-                //create edit button
-                JFXButton editBtn = new JFXButton("Edit",new ImageView("/img/table/update.png"));
-                editBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                editBtn.getStyleClass().add("EditBtn");
-                editBtn.setPrefSize(50,40);
-                setEditBtnAction(editBtn,studentDTO);
+            //create edit button
+            JFXButton editBtn = new JFXButton("Edit",new ImageView("/img/table/update.png"));
+            editBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            editBtn.getStyleClass().add("EditBtn");
+            editBtn.setPrefSize(50,40);
+            setEditBtnAction(editBtn,studentDTO);
 
-                //create remove button
-                JFXButton removeBtn = new JFXButton("remove",new ImageView("/img/table/remove.png"));
-                removeBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                removeBtn.getStyleClass().add("RemoveBtn");
-                removeBtn.setPrefSize(50,40);
-                setRemoveBtnAction(removeBtn,studentDTO);
+            //create remove button
+            JFXButton removeBtn = new JFXButton("remove",new ImageView("/img/table/remove.png"));
+            removeBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            removeBtn.getStyleClass().add("RemoveBtn");
+            removeBtn.setPrefSize(50,40);
+            setRemoveBtnAction(removeBtn,studentDTO);
 
-                //add buttons to hbox
-                HBox hBox = new HBox(editBtn,removeBtn);
-                hBox.setAlignment(Pos.CENTER);
-                hBox.setSpacing(15);
+            //add buttons to hbox
+            HBox hBox = new HBox(editBtn,removeBtn);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setSpacing(15);
 
-                studentTMS.add(new StudentTM(studentDTO.getStudentId(),
-                        studentDTO.getName(),studentDTO.getAddress(),
-                        studentDTO.getContactNo(), studentDTO.getGender(),
-                        hBox
-                ));
-            }
-            tblStudent.setItems(studentTMS);
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            studentTMS.add(new StudentTM(studentDTO.getStudentId(),
+                    studentDTO.getName(),studentDTO.getAddress(),
+                    studentDTO.getContactNo(), studentDTO.getGender(),
+                    hBox
+            ));
         }
+        tblStudent.setItems(studentTMS);
     }
 
     public void searchFilter(){
@@ -147,18 +143,15 @@ public class StudentFormController {
 
             if (result.orElse(no) == yes){
                 //delete student
-                try {
-                    boolean isDeleted = studentBO.deleteStudent(student.getStudentId());
-                    if (isDeleted){
-                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student deleted successfully", ButtonType.OK).show();
-                        populateStudentTable();
-                        searchFilter();
-                    }else{
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the student").show();
-                    }
-                } catch (SQLException | IOException ex) {
-                    ex.printStackTrace();
+                boolean isDeleted = studentBO.deleteStudent(student.getStudentId());
+                if (isDeleted){
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student deleted successfully", ButtonType.OK).show();
+                    populateStudentTable();
+                    searchFilter();
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to delete the student").show();
                 }
+
             }
         });
     }

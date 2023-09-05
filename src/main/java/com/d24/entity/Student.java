@@ -29,7 +29,7 @@ public class Student {
     private LocalDate dob;
     private String gender;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
 }

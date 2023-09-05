@@ -3,22 +3,24 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="546.0" prefWidth="600.0" style="-fx-background-color: #e9ecef;" stylesheets="@../../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.popup.AddReservationFormController">
+<AnchorPane prefHeight="576.0" prefWidth="600.0" style="-fx-background-color: #e9ecef;" stylesheets="@../../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.popup.AddReservationFormController">
     <children>
         <Label layoutX="41.0" layoutY="36.0" text="New Reservation" textFill="#9170cb">
             <font>
                 <Font name="Comic Sans MS" size="36.0" />
             </font>
         </Label>
-        <JFXDatePicker defaultColor="#9170cb" layoutX="56.0" layoutY="315.0" prefHeight="32.0" prefWidth="488.0" promptText="Date" showWeekNumbers="true" styleClass="font_change" />
-        <JFXComboBox focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="143.0" prefHeight="32.0" prefWidth="484.0" promptText="Student Id" styleClass="font_change" unFocusColor="#9170cb" />
-        <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="447.0" prefHeight="47.0" prefWidth="484.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
+        <JFXDatePicker fx:id="datePicker" defaultColor="#9170cb" layoutX="56.0" layoutY="304.0" prefHeight="32.0" prefWidth="488.0" promptText="Date" showWeekNumbers="true" styleClass="font_change" />
+        <JFXComboBox fx:id="cmbStudent" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="132.0" prefHeight="32.0" prefWidth="484.0" promptText="Student Id" styleClass="font_change" unFocusColor="#9170cb" />
+        <JFXButton graphicTextGap="12.0" layoutX="53.0" layoutY="494.0" onAction="#btnSaveOnAction" prefHeight="47.0" prefWidth="484.0" style="-fx-background-color: #7ae582; -fx-background-radius: 10px;" text="Save" textFill="WHITE">
             <font>
                 <Font name="Comic Sans MS Bold" size="20.0" />
             </font>
@@ -30,6 +32,24 @@
                 </ImageView>
             </graphic>
         </JFXButton>
-      <JFXComboBox focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="224.0" prefHeight="32.0" prefWidth="484.0" promptText="Room Type Id" styleClass="font_change" unFocusColor="#9170cb" />
+      <JFXComboBox fx:id="cmbRoom" focusColor="#9170cb" labelFloat="true" layoutX="53.0" layoutY="213.0" prefHeight="32.0" prefWidth="484.0" promptText="Room Type Id" styleClass="font_change" unFocusColor="#9170cb" />
+      <JFXRadioButton fx:id="rbPaymentDone" layoutX="56.0" layoutY="419.0" text="Payment done">
+         <toggleGroup>
+            <ToggleGroup fx:id="payment" />
+         </toggleGroup>
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="rbPendingPayment" layoutX="206.0" layoutY="419.0" text="Pending payment" toggleGroup="$payment">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </JFXRadioButton>
+      <Label layoutX="56.0" layoutY="370.0" text="Payment">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -7,12 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.io.IOException;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
     @Override
-    public boolean add(Student entity) throws IOException {
+    public boolean add(Student entity){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -29,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(String s) throws IOException {
+    public boolean delete(String s){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -49,7 +48,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean update(Student entity) throws IOException {
+    public boolean update(Student entity){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -67,7 +66,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean exists(String s) throws IOException {
+    public boolean exists(String s){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -87,7 +86,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public List<Student> getAll() throws IOException {
+    public List<Student> getAll(){
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -101,5 +100,25 @@ public class StudentDAOImpl implements StudentDAO {
         }finally {
             session.close();
         }
+    }
+
+    @Override
+    public Student get(String studentId){
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query query = session.createQuery("from Student where studentId = ?1");
+            query.setParameter(1, studentId);
+            Student student = (Student) query.uniqueResult();
+            transaction.commit();
+            return student;
+        }catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+        return null;
     }
 }

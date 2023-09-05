@@ -100,17 +100,14 @@ public class SignupFormController {
                     userDTO.setEmail(email);
                     userDTO.setPassword(password);
 
-                    try {
-                        boolean isSaved = signupBO.saveUser(userDTO);
-                        if (isSaved) {
-                            new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Sign up successful", ButtonType.OK).show();
-                            clearComponents();
-                        } else {
-                            new SystemAlert(Alert.AlertType.WARNING,"Warning","Sign up unsuccessful", ButtonType.OK).show();
-                        }
-                    } catch (SQLException | IOException e) {
-                        e.printStackTrace();
+                    boolean isSaved = signupBO.saveUser(userDTO);
+                    if (isSaved) {
+                        new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Sign up successful", ButtonType.OK).show();
+                        clearComponents();
+                    } else {
+                        new SystemAlert(Alert.AlertType.WARNING,"Warning","Sign up unsuccessful", ButtonType.OK).show();
                     }
+
                 }else{
                     new SystemAlert(Alert.AlertType.WARNING,"Warning","Invalid email", ButtonType.OK).show();
                 }

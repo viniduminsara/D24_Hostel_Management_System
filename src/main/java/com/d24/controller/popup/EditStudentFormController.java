@@ -17,9 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public class EditStudentFormController {
     @FXML
     private JFXTextField txtName;
@@ -71,20 +68,17 @@ public class EditStudentFormController {
                 studentDTO.setDob(datepicker.getValue());
                 studentDTO.setGender(gender);
 
-                try {
-                    boolean isUpdated = studentBO.updateStudent(studentDTO);
-                    if (isUpdated) {
-                        new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student update successful", ButtonType.OK).show();
-                        Stage stage = (Stage) txtName.getScene().getWindow();
-                        stage.close();
-                        studentFormController.populateStudentTable();
-                        studentFormController.searchFilter();
-                    } else {
-                        new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the student", ButtonType.OK).show();
-                    }
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
+                boolean isUpdated = studentBO.updateStudent(studentDTO);
+                if (isUpdated) {
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Student update successful", ButtonType.OK).show();
+                    Stage stage = (Stage) txtName.getScene().getWindow();
+                    stage.close();
+                    studentFormController.populateStudentTable();
+                    studentFormController.searchFilter();
+                } else {
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the student", ButtonType.OK).show();
                 }
+
             }else {
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please enter correct contact number").show();
             }

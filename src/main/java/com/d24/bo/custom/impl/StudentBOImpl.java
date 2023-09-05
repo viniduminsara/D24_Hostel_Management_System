@@ -8,7 +8,6 @@ import com.d24.dto.StudentDTO;
 import com.d24.entity.Student;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +16,13 @@ public class StudentBOImpl implements StudentBO {
     StudentDAO studentDAO = new StudentDAOImpl();
 
     @Override
-    public boolean saveStudent(StudentDTO studentDTO) throws SQLException, IOException {
+    public boolean saveStudent(StudentDTO studentDTO){
         Student student = Convertor.toStudent(studentDTO);
         return studentDAO.add(student);
     }
 
     @Override
-    public List<StudentDTO> getAllStudents() throws SQLException, IOException {
+    public List<StudentDTO> getAllStudents(){
         List<Student> students = studentDAO.getAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
         for (Student student : students) {
@@ -35,18 +34,18 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean updateStudent(StudentDTO studentDTO) throws SQLException, IOException {
+    public boolean updateStudent(StudentDTO studentDTO){
         Student student = Convertor.toStudent(studentDTO);
         return studentDAO.update(student);
     }
 
     @Override
-    public boolean deleteStudent(String studentId) throws SQLException, IOException {
+    public boolean deleteStudent(String studentId){
         return studentDAO.delete(studentId);
     }
 
     @Override
-    public boolean existStudent(String studentId) throws SQLException, IOException {
+    public boolean existStudent(String studentId){
         return studentDAO.exists(studentId);
     }
 }
