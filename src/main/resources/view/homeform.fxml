@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="730.0" prefWidth="1190.0" style="-fx-background-color: #e9ecef;" stylesheets="@../style/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.HomeformController">
+<AnchorPane prefHeight="730.0" prefWidth="1190.0" style="-fx-background-color: #e9ecef;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.controller.HomeformController">
    <children>
       <AnchorPane layoutX="31.0" layoutY="119.0" prefHeight="165.0" prefWidth="360.0" styleClass="total_pane">
          <children>
@@ -18,7 +19,7 @@
                   <Font name="Comic Sans MS Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="78.0" text="04" textFill="#9170cb">
+            <Label fx:id="lblStudents" layoutX="42.0" layoutY="78.0" text="04" textFill="#9170cb">
                <font>
                   <Font name="Comic Sans MS Bold" size="42.0" />
                </font>
@@ -29,6 +30,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow color="#cdcccc" height="30.0" offsetY="5.0" radius="14.5" width="30.0" />
+         </effect>
       </AnchorPane>
       <AnchorPane layoutX="412.0" layoutY="119.0" prefHeight="165.0" prefWidth="360.0" styleClass="total_pane">
          <children>
@@ -37,7 +41,7 @@
                   <Font name="Comic Sans MS Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="80.0" text="05" textFill="#9170cb">
+            <Label fx:id="lblRooms" layoutX="42.0" layoutY="80.0" text="05" textFill="#9170cb">
                <font>
                   <Font name="Comic Sans MS Bold" size="42.0" />
                </font>
@@ -48,6 +52,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow color="#cdcccc" height="30.0" offsetY="5.0" radius="14.5" width="30.0" />
+         </effect>
       </AnchorPane>
       <AnchorPane layoutX="792.0" layoutY="119.0" prefHeight="165.0" prefWidth="360.0" styleClass="total_pane">
          <children>
@@ -56,7 +63,7 @@
                   <Font name="Comic Sans MS Bold" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="36.0" layoutY="81.0" text="08" textFill="#9170cb">
+            <Label fx:id="lblReservation" layoutX="36.0" layoutY="81.0" text="08" textFill="#9170cb">
                <font>
                   <Font name="Comic Sans MS Bold" size="42.0" />
                </font>
@@ -67,8 +74,11 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow color="#cdcccc" height="30.0" offsetY="5.0" radius="14.5" width="30.0" />
+         </effect>
       </AnchorPane>
-      <Label layoutX="38.0" layoutY="22.0" text="Good morning, Vinidu Minsara" textFill="#9170cb">
+      <Label fx:id="lblGreet" layoutX="38.0" layoutY="22.0" text="Good morning, Vinidu Minsara" textFill="#9170cb">
          <font>
             <Font name="Comic Sans MS Bold" size="28.0" />
          </font>
@@ -78,42 +88,55 @@
             <Font name="Comic Sans MS Bold" size="35.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="31.0" layoutY="302.0" prefHeight="408.0" prefWidth="535.0" style="-fx-background-color: #e7e1ec; -fx-background-radius: 20px;">
-         <children>
-            <Label layoutX="36.0" layoutY="24.0" text="Income" textFill="#9170cb">
-               <font>
-                  <Font name="Comic Sans MS" size="22.0" />
-               </font>
-            </Label>
-            <Label layoutX="36.0" layoutY="68.0" text="Rs.63585" textFill="#9170cb">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="32.0" />
-               </font>
-            </Label>
-            <Label layoutX="187.0" layoutY="85.0" text=".00" textFill="#9170cb">
-               <font>
-                  <Font name="Comic Sans MS" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="36.0" layoutY="121.0" text="last 6 months" textFill="#9170cb">
-               <font>
-                  <Font name="Comic Sans MS" size="16.0" />
-               </font>
-            </Label>
-            <BarChart layoutX="23.0" layoutY="159.0" prefHeight="248.0" prefWidth="488.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </BarChart>
-         </children>
-      </AnchorPane>
       <Label layoutX="38.0" layoutY="70.0" text="Welcome to D24 Hostel Management System" textFill="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="29.0" layoutY="302.0" prefHeight="408.0" prefWidth="636.0" style="-fx-background-color: #e7e1ec; -fx-background-radius: 20px;">
+         <children>
+            <TableView fx:id="tblPendingPayment" layoutX="27.0" layoutY="73.0" prefHeight="316.0" prefWidth="581.0">
+              <columns>
+                <TableColumn fx:id="colStudentId" prefWidth="169.0" text="StudentId" />
+                <TableColumn fx:id="colName" prefWidth="213.0" text="Name" />
+                  <TableColumn fx:id="colContact" prefWidth="195.0" text="Contact Number" />
+              </columns>
+            </TableView>
+            <Label layoutX="44.0" layoutY="21.0" text="Pending Keymoney Payment" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS" size="22.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow color="#cdcccc" height="30.0" offsetY="5.0" radius="14.5" width="30.0" />
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="705.0" layoutY="377.0" prefHeight="241.0" prefWidth="433.0" style="-fx-background-color: #e7e1ec; -fx-background-radius: 20px;">
+         <effect>
+            <DropShadow color="#cdcccc" height="30.72" offsetY="5.0" radius="14.7625" width="30.33" />
+         </effect>
+         <children>
+            <Label fx:id="lblTime" layoutX="103.0" layoutY="51.0" prefHeight="70.0" prefWidth="228.0" text="12:23:56" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="50.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" layoutX="128.0" layoutY="133.0" prefHeight="46.0" prefWidth="178.0" text="2023/09/06" textFill="#9170cb">
+               <font>
+                  <Font name="Comic Sans MS" size="28.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="191.0" fitWidth="228.0" layoutX="103.0" layoutY="25.0" opacity="0.21" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../style/dashboard.css" />
+      <URL value="@../style/table.css" />
+   </stylesheets>
 </AnchorPane>

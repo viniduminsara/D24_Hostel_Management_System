@@ -5,4 +5,6 @@ import com.d24.entity.Room;
 
 public interface RoomDAO extends CrudDAO<Room,String> {
     Room get(String roomId);
+
+    String getCount();
 }

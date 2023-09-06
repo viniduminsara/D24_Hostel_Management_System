@@ -1,5 +1,6 @@
 package com.d24.controller;
 
+import animatefx.animation.Bounce;
 import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -41,13 +42,26 @@ public class LoginformController{
 
     @FXML
     void loginBtnOnAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) txtUsername.getScene().getWindow();
-        Parent scene = FXMLLoader.load(getClass().getResource("/view/dashboardForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        if (!txtUsername.getText().isEmpty()){
+            if (!txtPassword.getText().isEmpty()){
 
-        //add animation
-        new FadeIn(scene).play();
+
+            }else{
+                new Bounce(txtPassword).play();
+                new Bounce(txtVisiblePassword).play();
+                new Bounce(showpasswordbtn).play();
+                new Bounce(closepasswordbtn).play();
+            }
+        }else{
+            new Bounce(txtUsername).play();
+        }
+//        Stage stage = (Stage) txtUsername.getScene().getWindow();
+//        Parent scene = FXMLLoader.load(getClass().getResource("/view/dashboardForm.fxml"));
+//        stage.setScene(new Scene(scene));
+//        stage.show();
+//
+//        //add animation
+//        new FadeIn(scene).play();
     }
 
     @FXML
