@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {

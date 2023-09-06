@@ -25,9 +25,11 @@ public class Reservation {
     private String status;
 
     @ManyToOne
+    @JoinColumn(name = "student", referencedColumnName = "studentId")
     private Student student;
 
     @ManyToOne
+    @JoinColumn(name = "room", referencedColumnName = "roomTypeId")
     private Room room;
 
 

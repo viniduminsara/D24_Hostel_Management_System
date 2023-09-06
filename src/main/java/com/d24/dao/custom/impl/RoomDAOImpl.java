@@ -2,7 +2,6 @@ package com.d24.dao.custom.impl;
 
 import com.d24.dao.custom.RoomDAO;
 import com.d24.entity.Room;
-import com.d24.entity.Student;
 import com.d24.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,7 +16,7 @@ public class RoomDAOImpl implements RoomDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -34,11 +33,11 @@ public class RoomDAOImpl implements RoomDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query query = session.createQuery("delete from Room where roomTypeId=?1");
-            query.setParameter(1, s);
-            int update = query.executeUpdate();
+            Room room = new Room();
+            room.setRoomTypeId(s);
+            session.delete(room);
             transaction.commit();
-            return update > 0;
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
@@ -54,7 +53,7 @@ public class RoomDAOImpl implements RoomDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.merge(entity);
+            session.update(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -109,9 +108,7 @@ public class RoomDAOImpl implements RoomDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query query = session.createQuery("from Room where roomTypeId = ?1");
-            query.setParameter(1, roomId);
-            Room room = (Room) query.uniqueResult();
+            Room room = session.get(Room.class,roomId);
             transaction.commit();
             return room;
         }catch (Exception e) {

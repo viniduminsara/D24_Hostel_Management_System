@@ -22,7 +22,7 @@ public class Room {
     private Double keyMoney;
     private Integer qty;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,targetEntity = Reservation.class)
     private List<Reservation> reservations;
 
 }

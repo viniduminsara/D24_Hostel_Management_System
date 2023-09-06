@@ -86,7 +86,6 @@ public class AddReservationFormController {
             reservationDTO.setStudent(studentDTO);
 
             RoomDTO roomDTO = reservationBO.getRoom(cmbRoom.getValue());
-            roomDTO.setQty(roomDTO.getQty() - 1);
             reservationDTO.setRoom(roomDTO);
 
             boolean isSaved = reservationBO.saveReservation(reservationDTO);
@@ -95,6 +94,7 @@ public class AddReservationFormController {
                 Stage stage = (Stage) cmbRoom.getScene().getWindow();
                 stage.close();
                 reservationFormController.populateReservationTable();
+                reservationFormController.searchFilter();
             }else{
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to add the reservation").show();
             }

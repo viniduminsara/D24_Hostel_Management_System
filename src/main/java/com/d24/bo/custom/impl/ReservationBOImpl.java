@@ -68,4 +68,14 @@ public class ReservationBOImpl implements ReservationBO {
     public boolean saveReservation(ReservationDTO reservationDTO) {
         return reservationDAO.add(Convertor.toReservation(reservationDTO));
     }
+
+    @Override
+    public boolean updateRoom(RoomDTO roomDTO) {
+        return roomDAO.update(Convertor.toRoom(roomDTO));
+    }
+
+    @Override
+    public boolean cancelReservation(ReservationDTO reservationDTO) {
+        return reservationDAO.update(Convertor.toReservation(reservationDTO));
+    }
 }

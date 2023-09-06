@@ -5,16 +5,19 @@ import com.d24.bo.custom.impl.ReservationBOImpl;
 import com.d24.controller.popup.AddReservationFormController;
 import com.d24.dto.ReservationDTO;
 import com.d24.tm.ReservationTM;
+import com.d24.tm.RoomTM;
+import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,11 +25,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
-import javafx.scene.control.TableColumn;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ReservationFormController {
 
@@ -69,6 +72,7 @@ public class ReservationFormController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("hBox"));
 
         populateReservationTable();
+        searchFilter();
     }
 
     public void populateReservationTable() {
@@ -82,27 +86,27 @@ public class ReservationFormController {
                     //create pay button
                     JFXButton paybtn = new JFXButton("Mark as Paid");
                     paybtn.getStyleClass().add("EditBtn");
-                    paybtn.setPrefSize(50, 40);
+                    paybtn.setPrefHeight(40);
                     setPayBtnAction(paybtn, reservationDTO);
 
                     //create cancel button
-                    JFXButton cancelBtn = new JFXButton("Cancel");
+                    JFXButton cancelBtn = new JFXButton("Cancel Reservation");
                     cancelBtn.getStyleClass().add("RemoveBtn");
-                    cancelBtn.setPrefSize(50, 40);
+                    cancelBtn.setPrefHeight(40);
                     setCancelBtnAction(cancelBtn, reservationDTO);
 
                     //add buttons to hbox
                     hBox = new HBox(paybtn, cancelBtn);
                     hBox.setAlignment(Pos.CENTER);
-                    hBox.setSpacing(15);
+                    hBox.setSpacing(10);
 
                     break;
                 }
                 case "payment done": {
                     //create cancel button
-                    JFXButton cancelBtn = new JFXButton("Cancel");
+                    JFXButton cancelBtn = new JFXButton("Cancel Reservation");
                     cancelBtn.getStyleClass().add("RemoveBtn");
-                    cancelBtn.setPrefSize(50, 40);
+                    cancelBtn.setPrefHeight(40);
                     setCancelBtnAction(cancelBtn, reservationDTO);
 
                     //add buttons to hbox
@@ -114,7 +118,7 @@ public class ReservationFormController {
                 case "canceled":
                     Text text = new Text("Already Canceled");
                     hBox = new HBox(text);
-                    hBox.setPrefSize(50, 40);
+                    hBox.setPrefHeight(40);
                     hBox.setAlignment(Pos.CENTER);
                     break;
             }
@@ -129,10 +133,74 @@ public class ReservationFormController {
         }
     }
 
+    public void searchFilter(){
+        FilteredList<ReservationTM> filteredData = new FilteredList<>(reservationTMS, b -> true);
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) ->{
+            filteredData.setPredicate(ReservationTM -> {
+                if (newValue.isEmpty() || newValue.isBlank()){
+                    return true;
+                }
+                String searchKeyword = newValue.toLowerCase();
+
+                if (ReservationTM.getReservationId().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }else if(ReservationTM.getStudentId().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(ReservationTM.getRoomTypeId().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(ReservationTM.getStatus().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<ReservationTM> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tblReservation.comparatorProperty());
+        tblReservation.setItems(sortedData);
+    }
+
     private void setCancelBtnAction(JFXButton cancelBtn, ReservationDTO reservationDTO) {
+        cancelBtn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No",ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new SystemAlert(Alert.AlertType.INFORMATION,"Information","Do you want to cancel '"+reservationDTO.getReservationId()+"' reservation?",yes,no).showAndWait();
+
+            if (result.orElse(no) == yes){
+                reservationDTO.setStatus("canceled");
+                boolean isCanceled = reservationBO.cancelReservation(reservationDTO);
+                if (isCanceled){
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Reservation canceled successfully", ButtonType.OK).show();
+                    populateReservationTable();
+                    searchFilter();
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to cancel the reservation").show();
+                }
+            }
+        });
     }
 
     private void setPayBtnAction(JFXButton paybtn, ReservationDTO reservationDTO) {
+        paybtn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No",ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new SystemAlert(Alert.AlertType.INFORMATION,"Information","Do you want to complete payment of '"+reservationDTO.getReservationId()+"' reservation?",yes,no).showAndWait();
+
+            if (result.orElse(no) == yes){
+                reservationDTO.setStatus("payment done");
+                boolean isCanceled = reservationBO.cancelReservation(reservationDTO);
+                if (isCanceled){
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Reservation updated successfully", ButtonType.OK).show();
+                    populateReservationTable();
+                    searchFilter();
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the reservation").show();
+                }
+            }
+        });
     }
 
 

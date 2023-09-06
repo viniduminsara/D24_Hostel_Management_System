@@ -61,6 +61,7 @@ public class Convertor {
 
     public static Reservation toReservation(ReservationDTO reservationDTO) {
         Reservation reservation = new Reservation();
+        reservation.setReservationId(reservationDTO.getReservationId());
         reservation.setDate(reservationDTO.getDate());
         reservation.setStatus(reservationDTO.getStatus());
         reservation.setStudent(toStudent(reservationDTO.getStudent()));

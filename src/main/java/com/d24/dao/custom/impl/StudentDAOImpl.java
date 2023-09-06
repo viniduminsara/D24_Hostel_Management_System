@@ -16,7 +16,7 @@ public class StudentDAOImpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -33,11 +33,11 @@ public class StudentDAOImpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query query = session.createQuery("delete from Student where studentId=?1");
-            query.setParameter(1, s);
-            int update = query.executeUpdate();
+            Student student = new Student();
+            student.setStudentId(s);
+            session.delete(student);
             transaction.commit();
-            return update > 0;
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
@@ -53,7 +53,7 @@ public class StudentDAOImpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.merge(entity);
+            session.update(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -108,9 +108,7 @@ public class StudentDAOImpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Query query = session.createQuery("from Student where studentId = ?1");
-            query.setParameter(1, studentId);
-            Student student = (Student) query.uniqueResult();
+            Student student = session.get(Student.class,studentId);
             transaction.commit();
             return student;
         }catch (Exception e) {
