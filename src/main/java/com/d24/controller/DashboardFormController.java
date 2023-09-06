@@ -1,15 +1,20 @@
 package com.d24.controller;
 
 import animatefx.animation.*;
+import com.d24.dto.UserDTO;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +39,15 @@ public class DashboardFormController{
     @FXML
     private JFXButton AccountBtn;
 
+    @FXML
+    private ImageView profileImage;
+
+    @FXML
+    private Label lblUserName;
+
     private JFXButton lastClickedButton;
+
+    private UserDTO userDTO;
 
     public void initialize(){
         try {
@@ -47,7 +60,11 @@ public class DashboardFormController{
     @FXML
     void btnAccountOnAction(ActionEvent event) throws IOException {
         handleButtonClick(AccountBtn);
-        contentPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/accountForm.fxml")));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountForm.fxml"));
+        contentPane.getChildren().add(loader.load());
+        AccountFormController accountFormController = loader.getController();
+        accountFormController.setUser(userDTO);
+        accountFormController.setDetails();
         new SlideInRight(contentPane).setSpeed(2).play();
     }
 
@@ -99,5 +116,18 @@ public class DashboardFormController{
 
         // Set the current button as the lastClickedButton
         lastClickedButton = button;
+    }
+
+    public void setUser(UserDTO userDTO){
+        this.userDTO = userDTO;
+    }
+
+    public void setDetails(){
+        lblUserName.setText(userDTO.getFullName());
+
+        if (userDTO.getProfileImage() != null){
+            Image image = new Image(new ByteArrayInputStream(userDTO.getProfileImage()));
+            profileImage.setImage(image);
+        }
     }
 }

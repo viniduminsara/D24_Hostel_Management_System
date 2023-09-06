@@ -3,9 +3,11 @@ package com.d24.bo;
 import com.d24.dto.ReservationDTO;
 import com.d24.dto.RoomDTO;
 import com.d24.dto.StudentDTO;
+import com.d24.dto.UserDTO;
 import com.d24.entity.Reservation;
 import com.d24.entity.Room;
 import com.d24.entity.Student;
+import com.d24.entity.User;
 
 public class Convertor {
 
@@ -67,5 +69,16 @@ public class Convertor {
         reservation.setStudent(toStudent(reservationDTO.getStudent()));
         reservation.setRoom(toRoom(reservationDTO.getRoom()));
         return reservation;
+    }
+
+    public static UserDTO toUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUserId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setFullName(user.getFullName());
+        userDTO.setProfileImage(user.getProfileImage());
+        return userDTO;
     }
 }

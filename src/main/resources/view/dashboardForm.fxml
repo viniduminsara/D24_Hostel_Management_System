@@ -119,12 +119,12 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <ImageView fitHeight="53.0" fitWidth="62.0" layoutX="1248.0" layoutY="10.0" pickOnBounds="true">
+      <ImageView fx:id="profileImage" fitHeight="53.0" fitWidth="62.0" layoutX="1248.0" layoutY="10.0" pickOnBounds="true">
          <image>
             <Image url="@../img/account.png" />
          </image>
       </ImageView>
-      <Label layoutX="1322.0" layoutY="24.0" text="Vinidu Minsara" textFill="#9170cb">
+      <Label fx:id="lblUserName" layoutX="1322.0" layoutY="24.0" text="Vinidu Minsara" textFill="#9170cb">
          <font>
             <Font name="Comic Sans MS" size="18.0" />
          </font>
