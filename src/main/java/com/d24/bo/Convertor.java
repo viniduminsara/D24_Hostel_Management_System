@@ -81,4 +81,15 @@ public class Convertor {
         userDTO.setProfileImage(user.getProfileImage());
         return userDTO;
     }
+
+    public static User toUser(UserDTO userDTO) {
+        User user = new User();
+        user.setUserId(userDTO.getUserId());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setFullName(userDTO.getFullName());
+        user.setProfileImage(userDTO.getProfileImage());
+        return user;
+    }
 }

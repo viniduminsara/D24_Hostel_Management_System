@@ -60,6 +60,7 @@ public class LoginformController{
                     UserDTO userDTO = loginBO.getUser(username,password);
 
                     Stage stage = (Stage) txtUsername.getScene().getWindow();
+                    stage.setTitle("D24 Hostel Management System");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboardForm.fxml"));
                     Parent scene = loader.load();
                     stage.setScene(new Scene(scene));

@@ -1,21 +1,25 @@
 package com.d24.controller;
 
+import com.d24.bo.custom.AccountBO;
+import com.d24.bo.custom.impl.AccountBOImpl;
 import com.d24.dto.UserDTO;
+import com.d24.util.SystemAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 
 public class AccountFormController {
 
@@ -43,7 +47,11 @@ public class AccountFormController {
     @FXML
     private AnchorPane editPane;
 
+    AccountBO accountBO = new AccountBOImpl();
+
     UserDTO userDTO;
+
+    DashboardFormController dashboardFormController;
 
     @FXML
     void changePasswordOnAction(ActionEvent event) throws IOException {
@@ -75,6 +83,36 @@ public class AccountFormController {
         editPane.setVisible(true);
     }
 
+    @FXML
+    void btnEditprofilePictureOnAction(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select the image");
+        FileChooser.ExtensionFilter imageFilter =
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        File file = fileChooser.showOpenDialog(lblUsername.getScene().getWindow());
+        if (file != null) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                profileImage.setImage(new Image(fileInputStream));
+
+                byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+                userDTO.setProfileImage(imageBytes);
+                boolean isUpdated = accountBO.updateProfileImage(userDTO);
+                if (isUpdated){
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Profile image updated", ButtonType.OK).show();
+                    setDetails();
+                    dashboardFormController.setDetails();
+                }else{
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to updated the image").show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void setUser(UserDTO userDTO){
         this.userDTO = userDTO;
     }
@@ -91,5 +129,9 @@ public class AccountFormController {
         lblName.setText(userDTO.getUsername());
         lblGmail.setText(userDTO.getEmail());
         lblUsername.setText(userDTO.getUsername());
+    }
+
+    public void setDashboardController(DashboardFormController dashboardFormController) {
+        this.dashboardFormController = dashboardFormController;
     }
 }

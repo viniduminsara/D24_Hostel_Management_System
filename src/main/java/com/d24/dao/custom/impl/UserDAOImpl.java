@@ -1,7 +1,6 @@
 package com.d24.dao.custom.impl;
 
 import com.d24.dao.custom.UserDAO;
-import com.d24.entity.Room;
 import com.d24.entity.User;
 import com.d24.util.FactoryConfiguration;
 import org.hibernate.Session;
@@ -36,7 +35,20 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User entity) {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.update(entity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

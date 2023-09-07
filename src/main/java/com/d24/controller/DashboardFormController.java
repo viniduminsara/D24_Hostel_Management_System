@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
@@ -55,6 +56,7 @@ public class DashboardFormController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setImageView();
     }
 
     @FXML
@@ -64,6 +66,7 @@ public class DashboardFormController{
         contentPane.getChildren().add(loader.load());
         AccountFormController accountFormController = loader.getController();
         accountFormController.setUser(userDTO);
+        accountFormController.setDashboardController(this);
         accountFormController.setDetails();
         new SlideInRight(contentPane).setSpeed(2).play();
     }
@@ -129,5 +132,14 @@ public class DashboardFormController{
             Image image = new Image(new ByteArrayInputStream(userDTO.getProfileImage()));
             profileImage.setImage(image);
         }
+    }
+
+    private void setImageView() {
+        double cornerRadius = 30.0; // Set the desired corner radius
+        Rectangle clip = new Rectangle(
+                profileImage.getFitWidth(), profileImage.getFitHeight());
+        clip.setArcWidth(cornerRadius);
+        clip.setArcHeight(cornerRadius);
+        profileImage.setClip(clip);
     }
 }
