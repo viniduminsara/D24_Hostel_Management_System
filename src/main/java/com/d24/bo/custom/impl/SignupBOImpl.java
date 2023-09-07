@@ -1,23 +1,18 @@
 package com.d24.bo.custom.impl;
 
+import com.d24.bo.Convertor;
 import com.d24.bo.custom.SignupBO;
 import com.d24.dao.custom.UserDAO;
-import com.d24.dao.custom.impl.UserDAOImpl;
+import com.d24.dao.factory.DAOFactory;
+import com.d24.dao.factory.DAOTypes;
 import com.d24.dto.UserDTO;
-import com.d24.entity.User;
 
 public class SignupBOImpl implements SignupBO {
 
-    UserDAO userDAO = new UserDAOImpl();
+    UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.USER);
 
     @Override
     public boolean saveUser(UserDTO userDTO){
-        User user = new User();
-        user.setFullName(userDTO.getFullName());
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-
-        return userDAO.add(user);
+        return userDAO.add(Convertor.toUser(userDTO));
     }
 }

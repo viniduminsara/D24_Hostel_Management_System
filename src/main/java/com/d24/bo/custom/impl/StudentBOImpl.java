@@ -3,17 +3,17 @@ package com.d24.bo.custom.impl;
 import com.d24.bo.custom.StudentBO;
 import com.d24.bo.Convertor;
 import com.d24.dao.custom.StudentDAO;
-import com.d24.dao.custom.impl.StudentDAOImpl;
+import com.d24.dao.factory.DAOFactory;
+import com.d24.dao.factory.DAOTypes;
 import com.d24.dto.StudentDTO;
 import com.d24.entity.Student;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
 
-    StudentDAO studentDAO = new StudentDAOImpl();
+    StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.STUDENT);
 
     @Override
     public boolean saveStudent(StudentDTO studentDTO){

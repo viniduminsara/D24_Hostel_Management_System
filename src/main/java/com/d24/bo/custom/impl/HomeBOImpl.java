@@ -6,10 +6,8 @@ import com.d24.dao.custom.QueryDAO;
 import com.d24.dao.custom.ReservationDAO;
 import com.d24.dao.custom.RoomDAO;
 import com.d24.dao.custom.StudentDAO;
-import com.d24.dao.custom.impl.QueryDAOImpl;
-import com.d24.dao.custom.impl.ReservationDAOImpl;
-import com.d24.dao.custom.impl.RoomDAOImpl;
-import com.d24.dao.custom.impl.StudentDAOImpl;
+import com.d24.dao.factory.DAOFactory;
+import com.d24.dao.factory.DAOTypes;
 import com.d24.dto.StudentDTO;
 import com.d24.entity.Student;
 
@@ -18,10 +16,10 @@ import java.util.List;
 
 public class HomeBOImpl implements HomeBO {
 
-    StudentDAO studentDAO = new StudentDAOImpl();
-    RoomDAO roomDAO = new RoomDAOImpl();
-    ReservationDAO reservationDAO = new ReservationDAOImpl();
-    QueryDAO queryDAO = new QueryDAOImpl();
+    StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.STUDENT);
+    RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.ROOM);
+    ReservationDAO reservationDAO = (ReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.RESERVATION);
+    QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.QUERY);
 
     @Override
     public String getStudentCount() {

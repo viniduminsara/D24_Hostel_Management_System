@@ -3,17 +3,16 @@ package com.d24.bo.custom.impl;
 import com.d24.bo.Convertor;
 import com.d24.bo.custom.RoomBO;
 import com.d24.dao.custom.RoomDAO;
-import com.d24.dao.custom.impl.RoomDAOImpl;
+import com.d24.dao.factory.DAOFactory;
+import com.d24.dao.factory.DAOTypes;
 import com.d24.dto.RoomDTO;
 import com.d24.entity.Room;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomBOImpl implements RoomBO {
 
-    RoomDAO roomDAO = new RoomDAOImpl();
+    RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.ROOM);
 
     @Override
     public List<RoomDTO> getAllRooms(){

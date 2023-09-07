@@ -5,9 +5,8 @@ import com.d24.bo.custom.ReservationBO;
 import com.d24.dao.custom.ReservationDAO;
 import com.d24.dao.custom.RoomDAO;
 import com.d24.dao.custom.StudentDAO;
-import com.d24.dao.custom.impl.ReservationDAOImpl;
-import com.d24.dao.custom.impl.RoomDAOImpl;
-import com.d24.dao.custom.impl.StudentDAOImpl;
+import com.d24.dao.factory.DAOFactory;
+import com.d24.dao.factory.DAOTypes;
 import com.d24.dto.ReservationDTO;
 import com.d24.dto.RoomDTO;
 import com.d24.dto.StudentDTO;
@@ -20,9 +19,9 @@ import java.util.List;
 
 public class ReservationBOImpl implements ReservationBO {
 
-    ReservationDAO reservationDAO = new ReservationDAOImpl();
-    StudentDAO studentDAO = new StudentDAOImpl();
-    RoomDAO roomDAO = new RoomDAOImpl();
+    ReservationDAO reservationDAO = (ReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.RESERVATION);
+    StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.STUDENT);
+    RoomDAO roomDAO = (RoomDAO) DAOFactory.getDaoFactory().getDAO(DAOTypes.ROOM);
 
     @Override
     public List<ReservationDTO> getAllReservations(){
