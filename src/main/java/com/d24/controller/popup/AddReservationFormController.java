@@ -1,7 +1,8 @@
 package com.d24.controller.popup;
 
 import com.d24.bo.custom.ReservationBO;
-import com.d24.bo.custom.impl.ReservationBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.ReservationFormController;
 import com.d24.dto.ReservationDTO;
 import com.d24.dto.RoomDTO;
@@ -43,7 +44,7 @@ public class AddReservationFormController {
 
     ReservationFormController reservationFormController;
 
-    ReservationBO reservationBO = new ReservationBOImpl();
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBOFactory().getBO(BOTypes.RESERVATION);
     
     public void initialize(){
         setStudentComboBox();

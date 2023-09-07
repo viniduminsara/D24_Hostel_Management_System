@@ -1,7 +1,8 @@
 package com.d24.controller;
 
 import com.d24.bo.custom.HomeBO;
-import com.d24.bo.custom.impl.HomeBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.dto.StudentDTO;
 import com.d24.tm.PendingPaymentTM;
 import javafx.animation.Animation;
@@ -54,7 +55,7 @@ public class HomeformController {
     @FXML
     private Label lblDate;
 
-    HomeBO homeBO = new HomeBOImpl();
+    HomeBO homeBO = (HomeBO) BOFactory.getBOFactory().getBO(BOTypes.HOME);
 
     public void initialize(){
         //set Value factory to table

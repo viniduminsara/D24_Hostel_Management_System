@@ -1,7 +1,8 @@
 package com.d24.controller.popup;
 
 import com.d24.bo.custom.RoomBO;
-import com.d24.bo.custom.impl.RoomBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.RoomFromController;
 import com.d24.dto.RoomDTO;
 import com.d24.util.RegExPatterns;
@@ -30,7 +31,7 @@ public class AddRoomFormController {
 
     private RoomFromController roomFromController;
 
-    RoomBO roomBO = new RoomBOImpl();
+    RoomBO roomBO = (RoomBO) BOFactory.getBOFactory().getBO(BOTypes.ROOM);
 
     public void setRoomFormController(RoomFromController roomFromController) {
         this.roomFromController = roomFromController;

@@ -1,12 +1,12 @@
 package com.d24.controller;
 
 import com.d24.bo.custom.RoomBO;
-import com.d24.bo.custom.impl.RoomBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.popup.AddRoomFormController;
 import com.d24.controller.popup.EditRoomFormController;
 import com.d24.dto.RoomDTO;
 import com.d24.tm.RoomTM;
-import com.d24.tm.StudentTM;
 import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class RoomFromController {
     @FXML
     private JFXTextField txtSearch;
     
-    RoomBO roomBO = new RoomBOImpl();
+    RoomBO roomBO = (RoomBO) BOFactory.getBOFactory().getBO(BOTypes.ROOM);
     
     ObservableList<RoomTM> roomTMS = FXCollections.observableArrayList();
 

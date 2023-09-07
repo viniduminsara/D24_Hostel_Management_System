@@ -1,7 +1,8 @@
 package com.d24.controller.popup;
 
 import com.d24.bo.custom.StudentBO;
-import com.d24.bo.custom.impl.StudentBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.StudentFormController;
 import com.d24.dto.StudentDTO;
 import com.d24.util.RegExPatterns;
@@ -46,7 +47,7 @@ public class AddStudentFormController {
 
     private StudentFormController studentFormController;
 
-    StudentBO studentBO = new StudentBOImpl();
+    StudentBO studentBO = (StudentBO) BOFactory.getBOFactory().getBO(BOTypes.STUDENT);
 
     public void setStudentFormController(StudentFormController studentFormController) {
         this.studentFormController = studentFormController;

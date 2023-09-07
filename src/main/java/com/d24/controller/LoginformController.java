@@ -3,7 +3,8 @@ package com.d24.controller;
 import animatefx.animation.Bounce;
 import animatefx.animation.FadeIn;
 import com.d24.bo.custom.LoginBO;
-import com.d24.bo.custom.impl.LoginBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.dto.UserDTO;
 import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
@@ -38,7 +39,7 @@ public class LoginformController{
     @FXML
     private JFXTextField txtVisiblePassword;
 
-    LoginBO loginBO = new LoginBOImpl();
+    LoginBO loginBO = (LoginBO) BOFactory.getBOFactory().getBO(BOTypes.LOGIN);
 
     public void initialize(){
         closepasswordbtn.setVisible(false);

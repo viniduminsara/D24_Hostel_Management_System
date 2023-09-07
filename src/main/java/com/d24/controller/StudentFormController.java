@@ -1,7 +1,8 @@
 package com.d24.controller;
 
 import com.d24.bo.custom.StudentBO;
-import com.d24.bo.custom.impl.StudentBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.popup.AddStudentFormController;
 import com.d24.controller.popup.EditStudentFormController;
 import com.d24.dto.StudentDTO;
@@ -26,7 +27,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +56,7 @@ public class StudentFormController {
     @FXML
     private JFXTextField txtSearch;
 
-    StudentBO studentBO = new StudentBOImpl();
+    StudentBO studentBO = (StudentBO) BOFactory.getBOFactory().getBO(BOTypes.STUDENT);
 
     ObservableList<StudentTM> studentTMS = FXCollections.observableArrayList();
 

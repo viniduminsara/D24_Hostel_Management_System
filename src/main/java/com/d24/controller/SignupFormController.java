@@ -2,7 +2,8 @@ package com.d24.controller;
 
 import animatefx.animation.FadeIn;
 import com.d24.bo.custom.SignupBO;
-import com.d24.bo.custom.impl.SignupBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.dto.UserDTO;
 import com.d24.util.RegExPatterns;
 import com.d24.util.SystemAlert;
@@ -21,7 +22,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class SignupFormController {
@@ -53,7 +53,7 @@ public class SignupFormController {
     @FXML
     private JFXButton signupBtn;
 
-    SignupBO signupBO = new SignupBOImpl();
+    SignupBO signupBO = (SignupBO) BOFactory.getBOFactory().getBO(BOTypes.SIGNUP);
 
     public void initialize(){
         closePasswordBtn.setVisible(false);

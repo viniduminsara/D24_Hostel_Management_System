@@ -1,11 +1,11 @@
 package com.d24.controller;
 
 import com.d24.bo.custom.ReservationBO;
-import com.d24.bo.custom.impl.ReservationBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.popup.AddReservationFormController;
 import com.d24.dto.ReservationDTO;
 import com.d24.tm.ReservationTM;
-import com.d24.tm.RoomTM;
 import com.d24.util.SystemAlert;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -19,7 +19,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -27,7 +26,6 @@ import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +55,7 @@ public class ReservationFormController {
     @FXML
     private JFXTextField txtSearch;
 
-    ReservationBO reservationBO = new ReservationBOImpl();
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBOFactory().getBO(BOTypes.RESERVATION);
 
     ObservableList<ReservationTM> reservationTMS = FXCollections.observableArrayList();
 

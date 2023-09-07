@@ -1,7 +1,8 @@
 package com.d24.controller;
 
 import com.d24.bo.custom.AccountBO;
-import com.d24.bo.custom.impl.AccountBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.popup.ChangePasswordFormController;
 import com.d24.controller.popup.EditAccountFormController;
 import com.d24.dto.UserDTO;
@@ -49,7 +50,7 @@ public class AccountFormController {
     @FXML
     private AnchorPane editPane;
 
-    AccountBO accountBO = new AccountBOImpl();
+    AccountBO accountBO = (AccountBO) BOFactory.getBOFactory().getBO(BOTypes.ACCOUNT);
 
     UserDTO userDTO;
 

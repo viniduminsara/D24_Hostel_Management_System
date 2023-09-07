@@ -1,7 +1,8 @@
 package com.d24.controller.popup;
 
 import com.d24.bo.custom.AccountBO;
-import com.d24.bo.custom.impl.AccountBOImpl;
+import com.d24.bo.factory.BOFactory;
+import com.d24.bo.factory.BOTypes;
 import com.d24.controller.AccountFormController;
 import com.d24.dto.UserDTO;
 import com.d24.util.RegExPatterns;
@@ -26,7 +27,7 @@ public class EditAccountFormController {
 
     UserDTO userDTO = new UserDTO();
 
-    AccountBO accountBO = new AccountBOImpl();
+    AccountBO accountBO = (AccountBO) BOFactory.getBOFactory().getBO(BOTypes.ACCOUNT);
 
     AccountFormController accountFormController;
 
