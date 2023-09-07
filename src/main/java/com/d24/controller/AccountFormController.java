@@ -2,6 +2,7 @@ package com.d24.controller;
 
 import com.d24.bo.custom.AccountBO;
 import com.d24.bo.custom.impl.AccountBOImpl;
+import com.d24.controller.popup.ChangePasswordFormController;
 import com.d24.controller.popup.EditAccountFormController;
 import com.d24.dto.UserDTO;
 import com.d24.util.SystemAlert;
@@ -56,12 +57,25 @@ public class AccountFormController {
 
     @FXML
     void changePasswordOnAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/changePasswordForm.fxml"))));
-        stage.setTitle("Change Password");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.centerOnScreen();
-        stage.showAndWait();
+        if (!txtCurrentPassword.getText().isEmpty()){
+            if (userDTO.getPassword().equals(txtCurrentPassword.getText())){
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup/changePasswordForm.fxml"));
+                stage.setScene(new Scene(loader.load()));
+                ChangePasswordFormController controller = loader.getController();
+                controller.setAccountFormController(this);
+                controller.setUser(userDTO);
+                stage.setTitle("Change Password");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.centerOnScreen();
+                stage.showAndWait();
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "incorrect password").show();
+            }
+        }else{
+            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Enter the current password").show();
+        }
+
     }
 
     @FXML
@@ -122,6 +136,7 @@ public class AccountFormController {
     public void refreshUser(){
         this.userDTO = accountBO.getUser(userDTO.getUserId());
         setDetails();
+        dashboardFormController.setUser(userDTO);
         dashboardFormController.setDetails();
     }
 
