@@ -14,4 +14,14 @@ public class AccountBOImpl implements AccountBO {
     public boolean updateProfileImage(UserDTO userDTO) {
         return userDAO.update(Convertor.toUser(userDTO));
     }
+
+    @Override
+    public boolean updateDetails(UserDTO userDTO) {
+        return userDAO.update(Convertor.toUser(userDTO));
+    }
+
+    @Override
+    public UserDTO getUser(String userId) {
+        return Convertor.toUserDTO(userDAO.get(userId));
+    }
 }

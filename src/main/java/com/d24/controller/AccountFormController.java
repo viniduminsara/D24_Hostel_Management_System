@@ -2,6 +2,7 @@ package com.d24.controller;
 
 import com.d24.bo.custom.AccountBO;
 import com.d24.bo.custom.impl.AccountBOImpl;
+import com.d24.controller.popup.EditAccountFormController;
 import com.d24.dto.UserDTO;
 import com.d24.util.SystemAlert;
 import javafx.event.ActionEvent;
@@ -66,7 +67,12 @@ public class AccountFormController {
     @FXML
     void editProfileOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/popup/editAccountForm.fxml"))));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/popup/editAccountForm.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        EditAccountFormController editAccountFormController = loader.getController();
+        editAccountFormController.setUserDTO(userDTO);
+        editAccountFormController.setDetails();
+        editAccountFormController.setAccountFormController(this);
         stage.setTitle("Edit Profile");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.centerOnScreen();
@@ -105,12 +111,18 @@ public class AccountFormController {
                     setDetails();
                     dashboardFormController.setDetails();
                 }else{
-                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to updated the image").show();
+                    new SystemAlert(Alert.AlertType.WARNING, "Warning", "Failed to update the image").show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void refreshUser(){
+        this.userDTO = accountBO.getUser(userDTO.getUserId());
+        setDetails();
+        dashboardFormController.setDetails();
     }
 
     public void setUser(UserDTO userDTO){
@@ -126,7 +138,7 @@ public class AccountFormController {
             profileImage.setImage(image);
         }
 
-        lblName.setText(userDTO.getUsername());
+        lblName.setText(userDTO.getFullName());
         lblGmail.setText(userDTO.getEmail());
         lblUsername.setText(userDTO.getUsername());
     }
