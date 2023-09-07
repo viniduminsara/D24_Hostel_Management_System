@@ -103,7 +103,18 @@ public class SignupFormController {
                     boolean isSaved = signupBO.saveUser(userDTO);
                     if (isSaved) {
                         new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Sign up successful", ButtonType.OK).show();
-                        clearComponents();
+                        Stage stage = (Stage) txtUsername.getScene().getWindow();
+                        Parent scene = null;
+                        try {
+                            scene = FXMLLoader.load(getClass().getResource("/view/loginform.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        stage.setScene(new Scene(scene));
+                        stage.show();
+
+                        //add animation
+                        new FadeIn(scene).play();
                     } else {
                         new SystemAlert(Alert.AlertType.WARNING,"Warning","Sign up unsuccessful", ButtonType.OK).show();
                     }
@@ -146,13 +157,6 @@ public class SignupFormController {
         txtPassword.setVisible(false);
         showPasswordBtn.setVisible(false);
         txtVisiblePassword.requestFocus();
-    }
-
-    private void clearComponents(){
-        txtFullName.clear();
-        txtUsername.clear();
-        txtEmail.clear();
-        txtPassword.clear();
     }
 
 }

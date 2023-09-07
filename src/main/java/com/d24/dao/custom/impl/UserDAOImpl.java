@@ -72,7 +72,6 @@ public class UserDAOImpl implements UserDAO {
             query.setParameter(2,password);
             return (User) query.getSingleResult();
         }catch (Exception e){
-            e.printStackTrace();
             transaction.rollback();
         }finally {
             session.close();

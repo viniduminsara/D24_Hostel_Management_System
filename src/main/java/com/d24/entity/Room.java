@@ -22,7 +22,7 @@ public class Room {
     private Double keyMoney;
     private Integer qty;
 
-    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,targetEntity = Reservation.class)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
 }
