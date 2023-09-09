@@ -87,6 +87,7 @@ public class AddReservationFormController {
             reservationDTO.setStudent(studentDTO);
 
             RoomDTO roomDTO = reservationBO.getRoom(cmbRoom.getValue());
+            roomDTO.setQty(roomDTO.getQty() - 1);
             reservationDTO.setRoom(roomDTO);
 
             boolean isSaved = reservationBO.saveReservation(reservationDTO);

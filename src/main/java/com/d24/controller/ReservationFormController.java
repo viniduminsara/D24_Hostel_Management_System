@@ -168,6 +168,7 @@ public class ReservationFormController {
 
             if (result.orElse(no) == yes){
                 reservationDTO.setStatus("canceled");
+                reservationDTO.getRoom().setQty(reservationDTO.getRoom().getQty() + 1);
                 boolean isCanceled = reservationBO.cancelReservation(reservationDTO);
                 if (isCanceled){
                     new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Reservation canceled successfully", ButtonType.OK).show();
